@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Chronicles: The Hotel Wi-Fi Saga</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-color: #2563eb; /* Tech Blue */
+            --text-dark: #1f2937;
+            --text-light: #4b5563;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        /* Scroll Progress Bar */
+        #progress-container {
+            width: 100%;
+            height: 5px;
+            background: #ccc;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        #progress-bar {
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .meta-data {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Main Content */
+        article {
+            background: var(--card-bg);
+            margin-top: 30px;
+            margin-bottom: 50px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* Image Styling */
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: -15px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #111827;
+            color: white;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            article { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <span style="background: #dbeafe; color: #1e40af; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">NETWORKING VLOG</span>
+            <h1>That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel</h1>
+            <div class="meta-data">By IT Intern | 5 Minute Read</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/10079363241028419233_0" alt="Frustrated guest at hotel" class="blog-image">
+            <p class="image-caption">The glamour of a luxury hotel meets the horror of buffering.</p>
+
+            <p>So here's the thing about working IT at a luxury hotel – you'd think the biggest challenges would be fancy tech problems, right? Nope. It was Wi-Fi. Always the Wi-Fi.</p>
+            
+            <p>During my internship last summer, I probably handled Wi-Fi complaints at least 5-6 times daily. Guests would come down to the front desk, visibly frustrated because they couldn't connect for their business calls or Netflix binges. The pressure was real because when someone's paying premium rates for a room, they expect everything to work perfectly.</p>
+
+            <h2>The Access Point Overload Problem</h2>
+            
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/16962851532667790269_0" alt="Network congestion visualization" class="blog-image">
+            
+            <p>I remember this one weekend when the hotel was fully booked for a wedding. Suddenly, the entire west wing started complaining about slow internet. Turns out, everyone was connected to just two access points while four others sat there practically idle.</p>
+            
+            <p>Once I figured out how to log into the controller (took me a few tries initially, not gonna lie), I could see the distribution was completely lopsided. After balancing the load, guests stopped calling within the hour.</p>
+
+            <h2>When Guests Become Accidental Hackers</h2>
+            <p>Here's something I never expected – some business travelers would bring their own portable routers to create personal hotspots. Sounds harmless, but these things wreaked havoc on our network. They'd create interference and confuse other devices.</p> 
+            
+            <p>My supervisor showed me how to identify these rogue devices in the system, and we'd politely ask guests to disconnect them. Most people had no idea they were causing issues.</p>
+
+            <h2>The Mystery of the 169 Addresses</h2>
+            
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/5998369940690598309_0" alt="Terminal showing APIPA address" class="blog-image">
+
+            <p>Ever see an IP address starting with 169.254? Yeah, that became my nemesis for a while. Devices were assigning themselves these weird APIPA addresses because they couldn't reach our DHCP server.</p> 
+            
+            <p>The first few times this happened, I panicked. But eventually I learned that restarting the DHCP service usually cleared things up. Sometimes the simple solutions are the best ones.</p>
+
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #eee;">
+
+            <p><strong>Looking back</strong>, those two months taught me more about practical networking than an entire semester of classes. Theory is great, but nothing beats troubleshooting real problems with impatient guests waiting for answers.</p>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 The IT Intern Vlog. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT FUNCTIONALITY ---
+        
+        // Progress Bar Logic
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+    </script>
+</body>
+</html>
