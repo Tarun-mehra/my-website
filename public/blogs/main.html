@@ -246,7 +246,40 @@
 
     <script>
         const blogPosts = [
-            {
+    {
+        id: 100,
+        title: "VLANs Finally Made Sense When I Saw Them in Action",
+        excerpt: "Real-world VLAN implementation at a hotel network. Learn how network segmentation works in practice and why VLAN assignment matters for security and performance.",
+        author: "Tarun Mehra",
+        date: "Nov 23, 2025",
+        readTime: "5 min",
+        category: "Networking",
+        image: "../resources/hero2.jpg",
+        url: "article2.html"
+    },
+    {
+        id: 101,
+        title: "IP Address Configuration – My Daily Morning Routine",
+        excerpt: "Daily IP configuration troubleshooting stories from hotel IT internship. Learn about DHCP issues, duplicate IPs, subnetting, and network addressing problems.",
+        author: "Tarun Mehra",
+        date: "Nov 23, 2025",
+        readTime: "5 min",
+        category: "Networking",
+        image: "../resources/hero3.jpg",
+        url: "article3.html"
+    },
+    {
+        id: 102,
+        title: "That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel",
+        excerpt: "Real-world Wi-Fi troubleshooting stories from a five-star hotel IT internship. Learn about access point management, network interference, and guest Wi-Fi challenges.",
+        author: "Tarun Mehra",
+        date: "Nov 23, 2025",
+        readTime: "5 min",
+        category: "Networking",
+        image: "../resources/hero1.jpg",
+        url: "article1.html"
+    },
+{
                 id: 1,
                 title: "Getting Started with React Hooks",
                 excerpt: "Learn the fundamentals of React Hooks and how they can simplify your component logic and state management.",
@@ -326,7 +359,7 @@
                 category: "JavaScript",
                 image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop"
             }
-        ];
+];
 
         let currentCategory = 'All';
 
@@ -344,7 +377,7 @@
             noResults.style.display = 'none';
             
             blogGrid.innerHTML = posts.map(post => `
-                <div class="blog-card" onclick="openBlog(${post.id})">
+                <div class="blog-card" onclick="if(post.url) window.location.href=post.url; else openBlog(${post.id})">
                     <img src="${post.image}" alt="${post.title}" class="blog-image">
                     <div class="blog-content">
                         <span class="blog-category">${post.category}</span>

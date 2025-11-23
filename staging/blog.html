@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarun mehra - Real Stories from IT Internships</title>
+    <meta name="description" content="Real-world IT experiences and networking stories from internships. Learn practical networking, troubleshooting, and system administration through authentic stories.">
+    <meta name="keywords" content="IT internships, networking, Wi-Fi troubleshooting, VLANs, Linux, system administration, tech stories">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #2C2C2C;
+            --text-secondary: #6B6B6B;
+            --accent-gold: #D4AF37;
+            --bg-subtle: #F8F8F8;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .aurora-bg {
+            background: linear-gradient(135deg, #FEFEFE 0%, #F8F8F8 50%, #FEFEFE 100%);
+            background-size: 400% 400%;
+            animation: aurora 8s ease-in-out infinite;
+        }
+        
+        @keyframes aurora {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .article-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .article-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .article-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-title {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .article-grid {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body class="aurora-bg">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl gradient-text">
+                    Tarun Mehra
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#articles" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">About</a>
+                    <a href="mailto:[email protected]" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#articles" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                <a href="#about" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">About</a>
+                <a href="h" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="hero-title font-display font-black text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">
+                <span class="gradient-text">Real Stories</span><br>
+                <span class="text-gray-800">from IT Internships</span>
+            </h1>
+            <p class="hero-subtitle text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Discover the practical lessons, unexpected challenges, and valuable insights gained from real-world IT experiences. 
+                From Wi-Fi troubleshooting to system administration, these are the stories that textbooks don't tell.
+            </p>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section id="articles" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="article-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Article 1 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero1.jpg" alt="Wi-Fi troubleshooting at luxury hotel" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article1.html">That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Working IT at a luxury hotel isn't about fancy tech problems—it's about Wi-Fi. Always the Wi-Fi. 
+                            Here's what I learned handling daily complaints from premium-paying guests.
+                        </p>
+                        <a href="article1.html" class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero2.jpg" alt="VLAN network segmentation" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article2.html">VLANs Finally Made Sense When I Saw Them in Action</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            VLANs seemed like just another exam concept until I saw five separate networks running simultaneously 
+                            at a hotel. One embarrassing mistake taught me why network segmentation matters.
+                        </p>
+                        <a href="article2.html" class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero3.jpg" alt="IP address configuration" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article3.html">IP Address Configuration – My Daily Morning Routine</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Every morning started with 3-4 tickets about computers that "stopped working overnight." 
+                            Nine times out of ten? IP configuration problems. Here's how I learned to love subnetting.
+                        </p>
+                        <a href="article3.html" class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero4.jpg" alt="Linux command line interface" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Linux</span>
+                            <span class="mx-2">•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article4.html">Why Linux Became My Favorite Operating System (Unexpectedly)</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            I resisted learning Linux until it completely changed how I approach problems. 
+                            What started as frustration became the most valuable skill I never expected to love.
+                        </p>
+                        <a href="article4.html" class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero5.jpg" alt="Data backup and recovery" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>System Administration</span>
+                            <span class="mx-2">•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article5.html">The Day Everything Went Wrong (And I Learned About Backups)</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            One Tuesday morning, the property management system failed completely. 
+                            Watching my supervisor restore from backup taught me why preparation is everything in IT.
+                        </p>
+                        <a href="article5.html" class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero6.jpg" alt="Cisco Packet Tracer network simulation" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article6.html">How Cisco Packet Tracer Prepared Me for Real Networks (Sort Of)</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Packet Tracer was my playground before touching real equipment. 
+                            Here's how simulation prepared me for actual networking—and where reality surprised me.
+                        </p>
+                        <a href="article6.html" class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-display font-bold text-3xl md:text-4xl mb-6 text-gray-900">
+                About Me
+            </h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                I'm Tarun Mehra, a B.Sc. IT Student & Cloud Network Specialist passionate about cloud infrastructure, network administration, and building scalable solutions. Currently mastering AWS, Linux systems, and network automation at Guru Nanak Dev University.
+            </p>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                During my 2-month traineeship with the IT team at a 5-star hotel, I gained hands-on experience handling guest calls, assisting with server maintenance, and troubleshooting network issues. I thrive in practical, hands-on work and I'm constantly eager to expand my knowledge—particularly in cloud networking, Linux server administration, and network automation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400 mb-6">
+                    <a href="https://tarunmehra.site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">tarunmehra.site</a>
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 Tarun Mehra. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

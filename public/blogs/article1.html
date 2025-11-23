@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel - Tarun Mehra</title>
+    <meta name="description" content="Real-world Wi-Fi troubleshooting stories from a five-star hotel IT internship. Learn about access point management, network interference, and guest Wi-Fi challenges.">
+    <meta name="keywords" content="Wi-Fi troubleshooting, hotel IT, networking, access points, DHCP, APIPA addresses, IT internship">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #2C2C2C;
+            --text-secondary: #6B6B6B;
+            --accent-gold: #D4AF37;
+            --bg-subtle: #F8F8F8;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), #B8860B);
+            z-index: 60;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .article-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+        
+        .article-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--text-primary);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .article-content ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: var(--bg-subtle);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .hero-image {
+            background: linear-gradient(135deg, rgba(44,44,44,0.1) 0%, rgba(212,175,55,0.1) 100%);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl gradient-text">
+                    <a href="index.html">Tarun Mehra</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Home</a>
+                    <a href="index.html#articles" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                    <a href="mailto:[email protected]" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
+                    <span>Networking</span>
+                    <span class="mx-2">•</span>
+                    <span>5 min read</span>
+                    <span class="mx-2">•</span>
+                    <span>December 2024</span>
+                </div>
+                <h1 class="font-display font-black text-3xl md:text-5xl lg:text-6xl leading-tight mb-6 fade-in">
+                    That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed fade-in">
+                    Working IT at a luxury hotel isn't about fancy tech problems—it's about Wi-Fi. Always the Wi-Fi.
+                </p>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="hero-image rounded-lg overflow-hidden mb-8 fade-in">
+                <img src="resources/hero1.jpg" alt="Wi-Fi networking in luxury hotel environment" class="w-full h-64 md:h-80 object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8 fade-in">
+                So here's the thing about working IT at a luxury hotel – you'd think the biggest challenges would be fancy tech problems, right? Nope. It was Wi-Fi. Always the Wi-Fi.
+            </p>
+
+            <p class="fade-in">
+                During my internship last summer, I probably handled Wi-Fi complaints at least 5-6 times daily. Guests would come down to the front desk, visibly frustrated because they couldn't connect for their business calls or Netflix binges. The pressure was real because when someone's paying premium rates for a room, they expect everything to work perfectly.
+            </p>
+
+            <h2>The Access Point Overload Problem</h2>
+            
+            <p class="fade-in">
+                I remember this one weekend when the hotel was fully booked for a wedding. Suddenly, the entire west wing started complaining about slow internet. Turns out, everyone was connected to just two access points while four others sat there practically idle.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Key Lesson:</p>
+                <p>Once I figured out how to log into the controller (took me a few tries initially, not gonna lie), I could see the distribution was completely lopsided. After balancing the load, guests stopped calling within the hour.</p>
+            </div>
+
+            <p class="fade-in">
+                This experience taught me that network management isn't just about having enough access points—it's about intelligent load distribution. In high-density environments like hotels, users naturally gravitate toward the strongest signal, often creating imbalanced loads that degrade performance for everyone.
+            </p>
+
+            <h2>When Guests Become Accidental Hackers</h2>
+            
+            <p class="fade-in">
+                Here's something I never expected – some business travelers would bring their own portable routers to create personal hotspots. Sounds harmless, but these things wreaked havoc on our network. They'd create interference and confuse other devices.
+            </p>
+
+            <p class="fade-in">
+                My supervisor showed me how to identify these rogue devices in the system, and we'd politely ask guests to disconnect them. Most people had no idea they were causing issues. This taught me about the importance of network monitoring and the human side of IT support.
+            </p>
+
+            <h2>The Mystery of the 169 Addresses</h2>
+            
+            <p class="fade-in">
+                Ever see an IP address starting with 169.254? Yeah, that became my nemesis for a while. Devices were assigning themselves these weird APIPA addresses because they couldn't reach our DHCP server.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Technical Insight:</p>
+                <p>APIPA (Automatic Private IP Addressing) addresses are self-assigned when DHCP servers are unreachable. The first few times this happened, I panicked. But eventually I learned that restarting the DHCP service usually cleared things up. Sometimes the simple solutions are the best ones.</p>
+            </div>
+
+            <p class="fade-in">
+                The pattern became predictable: during peak check-in times, the DHCP server would get overwhelmed with requests, causing timeouts and APIPA assignments. We implemented DHCP relay agents and increased lease times to handle the load better.
+            </p>
+
+            <h2>Lessons Learned</h2>
+            
+            <p class="fade-in">
+                Looking back, those two months taught me more about practical networking than an entire semester of classes. Theory is great, but nothing beats troubleshooting real problems with impatient guests waiting for answers.
+            </p>
+
+            <ul class="fade-in">
+                <li><strong>Load balancing is crucial</strong> in high-density environments</li>
+                <li><strong>Human factors</strong> often cause more network issues than technical failures</li>
+                <li><strong>Simple solutions</strong> are often the most effective</li>
+                <li><strong>Communication skills</strong> are as important as technical knowledge</li>
+                <li><strong>Monitoring and logging</strong> are essential for proactive problem-solving</li>
+            </ul>
+
+            <p class="fade-in">
+                The experience also taught me about the business impact of technical issues. When guests can't connect, it affects reviews, repeat business, and ultimately revenue. This business perspective has influenced how I approach every technical decision since.
+            </p>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="mt-16 p-8 bg-gray-50 rounded-lg fade-in">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    T
+                </div>
+                <div>
+                    <h3 class="font-display font-bold text-lg text-gray-900 mb-2">About the Author</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        I'm Tarun Mehra, a B.Sc. IT Student & Cloud Network Specialist passionate about cloud infrastructure, network administration, and building scalable solutions. Currently mastering AWS, Linux systems, and network automation at Guru Nanak Dev University.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Articles -->
+        <div class="mt-16 fade-in">
+            <h3 class="font-display font-bold text-2xl mb-8 text-center">Related Stories</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="article2.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">VLANs Finally Made Sense When I Saw Them in Action</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Network segmentation theory became reality when I saw five separate VLANs running simultaneously at the hotel.</p>
+                </a>
+                <a href="article3.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">IP Address Configuration – My Daily Morning Routine</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Every morning started with IP configuration problems. Here's how I learned to love subnetting the hard way.</p>
+                </a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400 mb-6">
+                    <a href="https://tarunmehra.site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">tarunmehra.site</a>
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 Tarun Mehra. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach((element, index) => {
+                gsap.to(element, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
