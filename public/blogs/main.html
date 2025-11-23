@@ -4,354 +4,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Discover Our Latest Posts</title>
+    <title>Tech Tales - Real Stories from IT Internships</title>
+    <meta name="description"
+        content="Real-world IT experiences and networking stories from internships. Learn practical networking, troubleshooting, and system administration through authentic stories.">
+    <meta name="keywords"
+        content="IT internships, networking, Wi-Fi troubleshooting, VLANs, Linux, system administration, tech stories">
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animation Libraries -->
+    <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #2C2C2C;
+            --text-secondary: #6B6B6B;
+            --accent-gold: #D4AF37;
+            --bg-subtle: #F8F8F8;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .font-display {
+            font-family: 'Playfair Display', serif;
         }
 
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .aurora-bg {
+            background: linear-gradient(135deg, #FEFEFE 0%, #F8F8F8 50%, #FEFEFE 100%);
+            background-size: 400% 400%;
+            animation: aurora 8s ease-in-out infinite;
         }
 
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        @keyframes aurora {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
-        .search-filter {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 40px;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .search-input {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .categories {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            padding: 10px 20px;
-            border: none;
-            background: #f0f0f0;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-
-        .category-btn:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .category-btn.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .blog-card {
-            background: white;
-            border-radius: 15px;
+        .article-card {
+            transition: all 0.3s ease;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
         }
 
-        .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .blog-image {
+        .article-card img {
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .blog-content {
-            padding: 25px;
+        .hero-title {
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .blog-category {
-            display: inline-block;
-            padding: 5px 15px;
-            background: #667eea;
-            color: white;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .blog-title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #2d3748;
-        }
-
-        .blog-excerpt {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 15px;
-            border-top: 1px solid #e0e0e0;
-            font-size: 14px;
-            color: #999;
-        }
-
-        .author-date {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .read-time {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .no-results h2 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .search-box {
-                flex-direction: column;
-            }
-
-            .search-input {
-                min-width: 100%;
-            }
+        .article-grid {
+            opacity: 0;
+            transform: translateY(30px);
         }
     </style>
+    <base target="_blank">
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <h1>📚 Our Blog</h1>
-            <p>Discover insights, tutorials, and stories from our community</p>
-        </header>
-
-        <div class="search-filter">
-            <div class="search-box">
-                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search blog posts...">
-            </div>
-            <div class="categories">
-                <button class="category-btn active" onclick="filterCategory('All')">All</button>
-                <button class="category-btn" onclick="filterCategory('Networking')">Networking</button>
-            </div>
-        </div>
-
-        <div class="blog-grid" id="blogGrid">
-            <!-- Blog posts will be inserted here -->
-        </div>
-
-        <div class="no-results" id="noResults" style="display: none;">
-            <h2>No posts found</h2>
-            <p>Try adjusting your search or filter criteria</p>
-        </div>
-    </div>
-
-    <script>
-        const blogPosts = [
-            {
-                id: 100,
-                title: "VLANs Finally Made Sense When I Saw Them in Action",
-                excerpt: "Real-world VLAN implementation at a hotel network. Learn how network segmentation works in practice and why VLAN assignment matters for security and performance.",
-                author: "Tarun Mehra",
-                date: "Nov 23, 2025",
-                readTime: "5 min",
-                category: "Networking",
-                image: "../resources/hero2.jpg",
-                url: "vlans-in-action.html"
-            },
-            {
-                id: 101,
-                title: "IP Address Configuration – My Daily Morning Routine",
-                excerpt: "Daily IP configuration troubleshooting stories from hotel IT internship. Learn about DHCP issues, duplicate IPs, subnetting, and network addressing problems.",
-                author: "Tarun Mehra",
-                date: "Nov 23, 2025",
-                readTime: "5 min",
-                category: "Networking",
-                image: "../resources/hero3.jpg",
-                url: "ip-address-configuration.html"
-            },
-            {
-                id: 102,
-                title: "That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel",
-                excerpt: "Real-world Wi-Fi troubleshooting stories from a five-star hotel IT internship. Learn about access point management, network interference, and guest Wi-Fi challenges.",
-                author: "Tarun Mehra",
-                date: "Nov 23, 2025",
-                readTime: "5 min",
-                category: "Networking",
-                image: "../resources/hero1.jpg",
-                url: "wifi-issues-at-five-star-hotel.html"
-            }
-        ];
-        let currentCategory = 'All';
-
-        function renderBlogPosts(posts) {
-            const blogGrid = document.getElementById('blogGrid');
-            const noResults = document.getElementById('noResults');
-
-            if (posts.length === 0) {
-                blogGrid.style.display = 'none';
-                noResults.style.display = 'block';
-                return;
-            }
-
-            blogGrid.style.display = 'grid';
-            noResults.style.display = 'none';
-
-            blogGrid.innerHTML = posts.map(post => `
-                <div class="blog-card" onclick="if(post.url) window.location.href=post.url; else openBlog(${post.id})">
-                    <img src="${post.image}" alt="${post.title}" class="blog-image">
-                    <div class="blog-content">
-                        <span class="blog-category">${post.category}</span>
-                        <h2 class="blog-title">${post.title}</h2>
-                        <p class="blog-excerpt">${post.excerpt}</p>
-                        <div class="blog-meta">
-                            <div class="author-date">
-                                <span>👤 ${post.author}</span>
-                                <span>📅 ${post.date}</span>
-                            </div>
-                            <div class="read-time">
-                                <span>⏱️ ${post.readTime}</span>
-                            </div>
-                        </div>
-                    </div>
+<body class="aurora-bg">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl gradient-text">
+                    Tech Tales
                 </div>
-            `).join('');
-        }
+                <div class="hidden md:flex space-x-8">
+                    <a href="#articles"
+                        class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">About</a>
+                    <a href="mailto:contact@techtales.com"
+                        class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-        function filterCategory(category) {
-            currentCategory = category;
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#articles"
+                    class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                <a href="#about" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">About</a>
+                <a href="mailto:contact@techtales.com"
+                    class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-            // Update active button
-            const buttons = document.querySelectorAll('.category-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="hero-title font-display font-black text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">
+                <span class="gradient-text">Real Stories</span><br>
+                <span class="text-gray-800">from IT Internships</span>
+            </h1>
+            <p class="hero-subtitle text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Discover the practical lessons, unexpected challenges, and valuable insights gained from real-world IT
+                experiences.
+                From Wi-Fi troubleshooting to system administration, these are the stories that textbooks don't tell.
+            </p>
+        </div>
+    </section>
 
-            filterPosts();
-        }
+    <!-- Articles Grid -->
+    <section id="articles" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="article-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        function filterPosts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                <!-- Article 1 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero1.jpg" alt="Wi-Fi troubleshooting at luxury hotel"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h2
+                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="wifi-issues-at-five-star-hotel.html">That Time I Spent Two Months Fixing Wi-Fi
+                                Issues at a Five-Star Hotel</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Working IT at a luxury hotel isn't about fancy tech problems—it's about Wi-Fi. Always the
+                            Wi-Fi.
+                            Here's what I learned handling daily complaints from premium-paying guests.
+                        </p>
+                        <a href="wifi-issues-at-five-star-hotel.html"
+                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
 
-            let filtered = blogPosts;
+                <!-- Article 2 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero2.jpg" alt="VLAN network segmentation" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h2
+                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="vlans-in-action.html">VLANs Finally Made Sense When I Saw Them in Action</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            VLANs seemed like just another exam concept until I saw five separate networks running
+                            simultaneously
+                            at a hotel. One embarrassing mistake taught me why network segmentation matters.
+                        </p>
+                        <a href="vlans-in-action.html"
+                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
 
-            // Filter by category
-            if (currentCategory !== 'All') {
-                filtered = filtered.filter(post => post.category === currentCategory);
-            }
+                <!-- Article 3 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero3.jpg" alt="IP address configuration" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h2
+                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="ip-address-configuration.html">IP Address Configuration – My Daily Morning
+                                Routine</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Every morning started with 3-4 tickets about computers that "stopped working overnight."
+                            Nine times out of ten? IP configuration problems. Here's how I learned to love subnetting.
+                        </p>
+                        <a href="ip-address-configuration.html"
+                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
 
-            // Filter by search term
-            if (searchTerm) {
-                filtered = filtered.filter(post =>
-                    post.title.toLowerCase().includes(searchTerm) ||
-                    post.excerpt.toLowerCase().includes(searchTerm) ||
-                    post.author.toLowerCase().includes(searchTerm)
-                );
-            }
+                <!-- Article 4 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero4.jpg" alt="Linux command line interface"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Linux</span>
+                            <span class="mx-2">•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h2
+                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article4.html">Why Linux Became My Favorite Operating System (Unexpectedly)</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            I resisted learning Linux until it completely changed how I approach problems.
+                            What started as frustration became the most valuable skill I never expected to love.
+                        </p>
+                        <a href="article4.html"
+                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
 
-            renderBlogPosts(filtered);
-        }
+                <!-- Article 5 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero5.jpg" alt="Data backup and recovery" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>System Administration</span>
+                            <span class="mx-2">•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h2
+                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article5.html">The Day Everything Went Wrong (And I Learned About Backups)</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            One Tuesday morning, the property management system failed completely.
+                            Watching my supervisor restore from backup taught me why preparation is everything in IT.
+                        </p>
+                        <a href="article5.html"
+                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
 
-        function openBlog(id) {
-            alert(`Opening blog post #${id}\n\nIn a real application, this would navigate to the full blog post page.`);
-        }
+                <!-- Article 6 -->
+                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img src="resources/hero6.jpg" alt="Cisco Packet Tracer network simulation"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>Networking</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h2
+                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
+                            <a href="article6.html">How Cisco Packet Tracer Prepared Me for Real Networks (Sort Of)</a>
+                        </h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Packet Tracer was my playground before touching real equipment.
+                            Here's how simulation prepared me for actual networking—and where reality surprised me.
+                        </p>
+                        <a href="article6.html"
+                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
+                            Read more
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
 
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', filterPosts);
+            </div>
+        </div>
+    </section>
 
-        // Initial render
-        renderBlogPosts(blogPosts);
-    </script>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-display font-bold text-3xl md:text-4xl mb-6 text-gray-900">
+                About Tech Tales
+            </h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                Tech Tales brings you authentic stories from the trenches of IT internships and early career
+                experiences.
+                We believe that the best way to learn technology is through real-world application, and these stories
+                capture the moments when theory meets practice.
+            </p>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                From Wi-Fi troubleshooting nightmares to unexpected Linux revelations, these tales showcase the
+                practical wisdom that only comes from hands-on experience in the field.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display font-bold text-2xl mb-4 gradient-text">
+                    Tech Tales
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Real stories from IT internships and early career experiences.
+                </p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="mailto:contact@techtales.com" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="sr-only">Email</span>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2024 Tech Tales. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
 </body>
 
 </html>
