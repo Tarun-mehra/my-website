@@ -22,6 +22,7 @@
     <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
     <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
         :root {
@@ -120,7 +121,6 @@
             transform: translateY(30px);
         }
     </style>
-    <base target="_blank">
 </head>
 
 <body class="aurora-bg">
@@ -129,13 +129,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="font-display font-bold text-xl gradient-text">
-                    Tech Tales
+                    <a href="../index.html">Tech Tales</a>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#articles"
                         class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
                     <a href="#about" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">About</a>
-                    <a href="mailto:contact@techtales.com"
+                    <a href="mailto:[email protected]"
                         class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
                 </div>
                 <div class="md:hidden">
@@ -155,7 +155,7 @@
                 <a href="#articles"
                     class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
                 <a href="#about" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">About</a>
-                <a href="mailto:contact@techtales.com"
+                <a href="mailto:[email protected]"
                     class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
             </div>
         </div>
@@ -276,97 +276,6 @@
                     </div>
                 </article>
 
-                <!-- Article 4 -->
-                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
-                        <img src="resources/hero4.jpg" alt="Linux command line interface"
-                            class="w-full h-48 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <span>Linux</span>
-                            <span class="mx-2">•</span>
-                            <span>5 min read</span>
-                        </div>
-                        <h2
-                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
-                            <a href="article4.html">Why Linux Became My Favorite Operating System (Unexpectedly)</a>
-                        </h2>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                            I resisted learning Linux until it completely changed how I approach problems.
-                            What started as frustration became the most valuable skill I never expected to love.
-                        </p>
-                        <a href="article4.html"
-                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
-                            Read more
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Article 5 -->
-                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
-                        <img src="resources/hero5.jpg" alt="Data backup and recovery" class="w-full h-48 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <span>System Administration</span>
-                            <span class="mx-2">•</span>
-                            <span>6 min read</span>
-                        </div>
-                        <h2
-                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
-                            <a href="article5.html">The Day Everything Went Wrong (And I Learned About Backups)</a>
-                        </h2>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                            One Tuesday morning, the property management system failed completely.
-                            Watching my supervisor restore from backup taught me why preparation is everything in IT.
-                        </p>
-                        <a href="article5.html"
-                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
-                            Read more
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Article 6 -->
-                <article class="article-card bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
-                        <img src="resources/hero6.jpg" alt="Cisco Packet Tracer network simulation"
-                            class="w-full h-48 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <span>Networking</span>
-                            <span class="mx-2">•</span>
-                            <span>4 min read</span>
-                        </div>
-                        <h2
-                            class="font-display font-bold text-xl mb-3 text-gray-900 hover:text-gray-700 transition-colors">
-                            <a href="article6.html">How Cisco Packet Tracer Prepared Me for Real Networks (Sort Of)</a>
-                        </h2>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                            Packet Tracer was my playground before touching real equipment.
-                            Here's how simulation prepared me for actual networking—and where reality surprised me.
-                        </p>
-                        <a href="article6.html"
-                            class="inline-flex items-center text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors">
-                            Read more
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-                </article>
 
             </div>
         </div>
@@ -402,7 +311,7 @@
                     Real stories from IT internships and early career experiences.
                 </p>
                 <div class="flex justify-center space-x-6 mb-8">
-                    <a href="mailto:contact@techtales.com" class="text-gray-400 hover:text-white transition-colors">
+                    <a href="mailto:[email protected]" class="text-gray-400 hover:text-white transition-colors">
                         <span class="sr-only">Email</span>
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -411,7 +320,7 @@
                     </a>
                 </div>
                 <p class="text-gray-500 text-sm">
-                    © 2024 Tech Tales. All rights reserved.
+                    © 2025 Tech Tales. All rights reserved.
                 </p>
             </div>
         </div>
