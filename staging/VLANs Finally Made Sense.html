@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://tarunmehra.site/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://tarunmehra.site/favicon_io/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://tarunmehra.site/favicon_io/apple-touch-icon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Chronicles: The Hotel Wi-Fi Saga</title>
+    <title>VLANs Finally Made Sense</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -330,100 +327,58 @@
         article {
             animation: fadeIn 0.6s ease-out;
         }
+
+
+
     </style>
 </head>
 <body>
 
-    <div id="progress-container">
-        <div id="progress-bar"></div>
+<div class="container">
+    <h1>Article 2: VLANs Finally Made Sense When I Saw Them in Action 💡</h1>
+
+    <p>You know how some concepts just don't click until you actually use them? <span class="highlight">VLANs were exactly that for me.</span></p>
+
+    <p>In class, I could explain VLANs well enough to pass exams. I understood they separated network traffic. Cool. But **WHY** we needed them and **HOW** they worked in real environments? That only made sense when I started my hotel internship.</p>
+
+    <h2>The Hotel Network Architecture 🏨</h2>
+
+    <p>The property I worked at had five separate **VLANs** running simultaneously. This is a classic example of **network segmentation** in a production environment.</p>
+
+    <div class="diagram-container">
+        <p>A VLAN (Virtual Local Area Network) conceptually separates a single physical switch into multiple virtual switches.</p>
+        
     </div>
 
-    <header>
-        <div class="container">
-            <span class="badge">Networking Vlog</span>
-            <h1>That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel</h1>
-            <div class="meta-data">
-                <span>📝 By IT Intern</span>
-                <span>⏱️ 5 Min Read</span>
-                <span>📅 2025</span>
-            </div>
-        </div>
-    </header>
+    <ul class="vlan-list">
+        <li>**Guest Wi-Fi** (obviously the busiest)</li>
+        <li>**Staff network** for employee devices</li>
+        <li>**CCTV system** with 50+ cameras</li>
+        <li>**Server infrastructure** for the property management system</li>
+        <li>**POS terminals** and billing computers throughout the hotel</li>
+    </ul>
 
-    <main class="container">
-        <article>
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80" alt="Luxury hotel lobby" class="blog-image hero-image">
-            </div>
-            <p class="image-caption">The glamour of a luxury hotel meets the reality of tech support.</p>
+    <p>Each VLAN was completely **isolated** from the others. This meant guests surfing the web couldn't accidentally (or intentionally) access the billing system. Security cameras transmitted footage without interfering with guest bandwidth. Everything had its own lane.</p>
 
-            <p>So here's the thing about working IT at a luxury hotel – you'd think the biggest challenges would be fancy tech problems, right? Nope. It was Wi-Fi. Always the Wi-Fi.</p>
-            
-            <p>During my internship last summer, I probably handled Wi-Fi complaints at least 5-6 times daily. Guests would come down to the front desk, visibly frustrated because they couldn't connect for their business calls or Netflix binges. The pressure was real because when someone's paying premium rates for a room, they expect everything to work perfectly.</p>
+    <h2>My Embarrassing VLAN Mistake 🤦</h2>
 
-            <h2>The Access Point Overload Problem</h2>
-            
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&q=80" alt="Network equipment and cables" class="blog-image content-image">
-            </div>
-            <p class="image-caption">Behind the scenes: the network infrastructure that keeps hotels connected.</p>
-            
-            <p>I remember this one weekend when the hotel was fully booked for a wedding. Suddenly, the entire west wing started complaining about slow internet. Turns out, everyone was connected to just two access points while four others sat there practically idle.</p>
-            
-            <p>Once I figured out how to log into the controller (took me a few tries initially, not gonna lie), I could see the distribution was completely lopsided. After balancing the load, guests stopped calling within the hour.</p>
+    <p>About three weeks in, I was setting up a new computer for the housekeeping supervisor. In my rush to finish before my lunch break, I connected it to the **guest VLAN** instead of the **staff one**.</p>
 
-            <h2>When Guests Become Accidental Hackers</h2>
-            
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1551808525-51a94da548ce?w=1200&q=80" alt="Person working on laptop in hotel" class="blog-image content-image">
-            </div>
-            <p class="image-caption">Business travelers and their tech – sometimes helpful, sometimes problematic.</p>
-            
-            <p>Here's something I never expected – some business travelers would bring their own portable routers to create personal hotspots. Sounds harmless, but these things wreaked havoc on our network. They'd create interference and confuse other devices.</p> 
-            
-            <p>My supervisor showed me how to identify these rogue devices in the system, and we'd politely ask guests to disconnect them. Most people had no idea they were causing issues.</p>
+    <p>The computer couldn't access any internal resources – no staff portal, no housekeeping management software, nothing.</p>
 
-            <h2>The Mystery of the 169 Addresses</h2>
-            
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1200&q=80" alt="Code on computer screen" class="blog-image content-image">
-            </div>
-            <p class="image-caption">Troubleshooting network issues one IP address at a time.</p>
+    <p>My supervisor found me frantically unplugging and replugging cables, trying to figure out what went wrong. When he checked and saw my mistake, he didn't get mad. He just smiled and said, <span class="highlight">"Now you'll never forget why VLAN assignment matters, will you?"</span> He was absolutely right. That moment of embarrassment burned the lesson into my brain forever.</p>
 
-            <p>Ever see an IP address starting with 169.254? Yeah, that became my nemesis for a while. Devices were assigning themselves these weird APIPA addresses because they couldn't reach our DHCP server.</p> 
-            
-            <p>The first few times this happened, I panicked. But eventually I learned that restarting the DHCP service usually cleared things up. Sometimes the simple solutions are the best ones.</p>
+    <h2>Seeing Network Segmentation Work 📈</h2>
 
-            <hr>
+    <p>The coolest part was monitoring traffic during busy periods. I could watch in real-time as guest VLAN usage spiked during evening hours (everyone streaming shows after dinner), while the POS VLAN stayed steady throughout meal service. The server VLAN had consistent traffic 24/7 since the property management system never stopped running.</p>
 
-            <p><strong>Looking back</strong>, those two months taught me more about practical networking than an entire semester of classes. Theory is great, but nothing beats troubleshooting real problems with impatient guests waiting for answers.</p>
-        </article>
-    </main>
+    <div class="diagram-container">
+        <p>A simplified view of network traffic isolation.</p>
+        
+    </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Tarun Mehra</div>
-            <div class="footer-links">
-                <a href="https://github.com/tarun-mehra" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://www.linkedin.com/in/tarunmehra1/" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://www.instagram.com/tarunmehra_real/" target="_blank" rel="noopener">Instagram</a>
-                <a href="mailto:info@tarunmehra.site">Email</a>
-            </div>
-            <div class="footer-copyright">© 2025 Tarun Mehra. All rights reserved.</div>
-        </div>
-    </footer>
+    <p>VLANs aren't just a networking concept anymore for me. They're the **practical solution** to keeping complex systems **organized and secure**. Textbooks can tell you that, but actually witnessing it changes your perspective completely.</p>
+</div>
 
-    <script>
-        // Progress Bar
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + '%';
-        });
-
-        // Smooth scroll for better mobile experience
-        document.documentElement.style.scrollBehavior = 'smooth';
-    </script>
 </body>
 </html>
