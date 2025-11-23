@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +35,7 @@
         header h1 {
             font-size: 3em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         header p {
@@ -46,7 +47,7 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 40px;
         }
 
@@ -110,14 +111,14 @@
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
 
         .blog-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
         .blog-image {
@@ -181,7 +182,7 @@
             padding: 60px 20px;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         .no-results h2 {
@@ -208,6 +209,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -217,20 +219,11 @@
 
         <div class="search-filter">
             <div class="search-box">
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="searchInput"
-                    placeholder="🔍 Search blog posts..."
-                >
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search blog posts...">
             </div>
             <div class="categories">
                 <button class="category-btn active" onclick="filterCategory('All')">All</button>
-                <button class="category-btn" onclick="filterCategory('React')">React</button>
-                <button class="category-btn" onclick="filterCategory('CSS')">CSS</button>
-                <button class="category-btn" onclick="filterCategory('JavaScript')">JavaScript</button>
-                <button class="category-btn" onclick="filterCategory('Design')">Design</button>
-                <button class="category-btn" onclick="filterCategory('Tutorial')">Tutorial</button>
+                <button class="category-btn" onclick="filterCategory('Networking')">Networking</button>
             </div>
         </div>
 
@@ -246,127 +239,46 @@
 
     <script>
         const blogPosts = [
-    {
-        id: 100,
-        title: "VLANs Finally Made Sense When I Saw Them in Action",
-        excerpt: "Real-world VLAN implementation at a hotel network. Learn how network segmentation works in practice and why VLAN assignment matters for security and performance.",
-        author: "Tarun Mehra",
-        date: "Nov 23, 2025",
-        readTime: "5 min",
-        category: "Networking",
-        image: "../resources/hero2.jpg",
-        url: "article2.html"
-    },
-    {
-        id: 101,
-        title: "IP Address Configuration – My Daily Morning Routine",
-        excerpt: "Daily IP configuration troubleshooting stories from hotel IT internship. Learn about DHCP issues, duplicate IPs, subnetting, and network addressing problems.",
-        author: "Tarun Mehra",
-        date: "Nov 23, 2025",
-        readTime: "5 min",
-        category: "Networking",
-        image: "../resources/hero3.jpg",
-        url: "article3.html"
-    },
-    {
-        id: 102,
-        title: "That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel",
-        excerpt: "Real-world Wi-Fi troubleshooting stories from a five-star hotel IT internship. Learn about access point management, network interference, and guest Wi-Fi challenges.",
-        author: "Tarun Mehra",
-        date: "Nov 23, 2025",
-        readTime: "5 min",
-        category: "Networking",
-        image: "../resources/hero1.jpg",
-        url: "article1.html"
-    },
-{
-                id: 1,
-                title: "Getting Started with React Hooks",
-                excerpt: "Learn the fundamentals of React Hooks and how they can simplify your component logic and state management.",
-                author: "Sarah Johnson",
-                date: "Nov 20, 2025",
+            {
+                id: 100,
+                title: "VLANs Finally Made Sense When I Saw Them in Action",
+                excerpt: "Real-world VLAN implementation at a hotel network. Learn how network segmentation works in practice and why VLAN assignment matters for security and performance.",
+                author: "Tarun Mehra",
+                date: "Nov 23, 2025",
                 readTime: "5 min",
-                category: "React",
-                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop"
+                category: "Networking",
+                image: "../resources/hero2.jpg",
+                url: "vlans-in-action.html"
             },
             {
-                id: 2,
-                title: "Modern CSS Techniques in 2025",
-                excerpt: "Explore the latest CSS features including container queries, cascade layers, and new color functions.",
-                author: "Mike Chen",
-                date: "Nov 18, 2025",
-                readTime: "7 min",
-                category: "CSS",
-                image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop"
+                id: 101,
+                title: "IP Address Configuration – My Daily Morning Routine",
+                excerpt: "Daily IP configuration troubleshooting stories from hotel IT internship. Learn about DHCP issues, duplicate IPs, subnetting, and network addressing problems.",
+                author: "Tarun Mehra",
+                date: "Nov 23, 2025",
+                readTime: "5 min",
+                category: "Networking",
+                image: "../resources/hero3.jpg",
+                url: "ip-address-configuration.html"
             },
             {
-                id: 3,
-                title: "JavaScript ES2025 Features You Should Know",
-                excerpt: "Discover the newest JavaScript features that will make your code cleaner and more efficient.",
-                author: "Alex Rivera",
-                date: "Nov 15, 2025",
-                readTime: "6 min",
-                category: "JavaScript",
-                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&h=400&fit=crop"
-            },
-            {
-                id: 4,
-                title: "Building Responsive Layouts with Flexbox",
-                excerpt: "Master the art of creating flexible and responsive layouts using CSS Flexbox with practical examples.",
-                author: "Emma Davis",
-                date: "Nov 12, 2025",
-                readTime: "8 min",
-                category: "CSS",
-                image: "https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?w=800&h=400&fit=crop"
-            },
-            {
-                id: 5,
-                title: "Design Systems: A Complete Guide",
-                excerpt: "Learn how to create and maintain a robust design system that scales with your organization.",
-                author: "John Smith",
-                date: "Nov 10, 2025",
-                readTime: "10 min",
-                category: "Design",
-                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop"
-            },
-            {
-                id: 6,
-                title: "React Performance Optimization Tips",
-                excerpt: "Boost your React application's performance with these proven optimization techniques and best practices.",
-                author: "Lisa Wang",
-                date: "Nov 8, 2025",
-                readTime: "9 min",
-                category: "React",
-                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop"
-            },
-            {
-                id: 7,
-                title: "Web Accessibility Best Practices",
-                excerpt: "Make your websites accessible to everyone with these essential accessibility guidelines and techniques.",
-                author: "David Brown",
-                date: "Nov 5, 2025",
-                readTime: "7 min",
-                category: "Tutorial",
-                image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=400&fit=crop"
-            },
-            {
-                id: 8,
-                title: "Mastering Async/Await in JavaScript",
-                excerpt: "Deep dive into asynchronous JavaScript and learn how to write cleaner async code with async/await.",
-                author: "Rachel Green",
-                date: "Nov 3, 2025",
-                readTime: "6 min",
-                category: "JavaScript",
-                image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop"
+                id: 102,
+                title: "That Time I Spent Two Months Fixing Wi-Fi Issues at a Five-Star Hotel",
+                excerpt: "Real-world Wi-Fi troubleshooting stories from a five-star hotel IT internship. Learn about access point management, network interference, and guest Wi-Fi challenges.",
+                author: "Tarun Mehra",
+                date: "Nov 23, 2025",
+                readTime: "5 min",
+                category: "Networking",
+                image: "../resources/hero1.jpg",
+                url: "wifi-issues-at-five-star-hotel.html"
             }
-];
-
+        ];
         let currentCategory = 'All';
 
         function renderBlogPosts(posts) {
             const blogGrid = document.getElementById('blogGrid');
             const noResults = document.getElementById('noResults');
-            
+
             if (posts.length === 0) {
                 blogGrid.style.display = 'none';
                 noResults.style.display = 'block';
@@ -375,7 +287,7 @@
 
             blogGrid.style.display = 'grid';
             noResults.style.display = 'none';
-            
+
             blogGrid.innerHTML = posts.map(post => `
                 <div class="blog-card" onclick="if(post.url) window.location.href=post.url; else openBlog(${post.id})">
                     <img src="${post.image}" alt="${post.title}" class="blog-image">
@@ -399,34 +311,34 @@
 
         function filterCategory(category) {
             currentCategory = category;
-            
+
             // Update active button
             const buttons = document.querySelectorAll('.category-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
+
             filterPosts();
         }
 
         function filterPosts() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
+
             let filtered = blogPosts;
-            
+
             // Filter by category
             if (currentCategory !== 'All') {
                 filtered = filtered.filter(post => post.category === currentCategory);
             }
-            
+
             // Filter by search term
             if (searchTerm) {
-                filtered = filtered.filter(post => 
+                filtered = filtered.filter(post =>
                     post.title.toLowerCase().includes(searchTerm) ||
                     post.excerpt.toLowerCase().includes(searchTerm) ||
                     post.author.toLowerCase().includes(searchTerm)
                 );
             }
-            
+
             renderBlogPosts(filtered);
         }
 
@@ -441,4 +353,5 @@
         renderBlogPosts(blogPosts);
     </script>
 </body>
+
 </html>
