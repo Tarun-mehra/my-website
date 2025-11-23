@@ -49,26 +49,33 @@
     </url>
     <!-- Blog -->
     <url>
-        <loc>https://tarunmehra.site/blog/main.html</loc>
+        <loc>https://tarunmehra.site/blogs/main.html</loc>
         <lastmod>2025-11-03</lastmod>
         <changefreq>never</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://tarunmehra.site/blog/vpn.html</loc>
+        <loc>https://tarunmehra.site/blogs/wifi-issues-at-five-star-hotel.html</loc>
+        <lastmod>2025-11-23</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://tarunmehra.site/blogs/vlans-in-action.html</loc>
         <lastmod>2025-11-03</lastmod>
         <changefreq>never</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://tarunmehra.site/blog/online-safety-guide.html</loc>
+        <loc>https://tarunmehra.site/blogs/ip-address-configuration.html</loc>
         <lastmod>2025-11-03</lastmod>
         <changefreq>never</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://tarunmehra.site/blog/aboutme.html</loc>
+        <loc>https://tarunmehra.site/blogs/aboutme.html</loc>
         <lastmod>2025-11-03</lastmod>
         <changefreq>never</changefreq>
         <priority>0.5</priority>

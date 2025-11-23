@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IP Address Configuration – My Daily Morning Routine - Tarun Mehra</title>
-    <meta name="description" content="Daily IP configuration troubleshooting stories from hotel IT internship. Learn about DHCP issues, duplicate IPs, subnetting, and network addressing problems.">
-    <meta name="keywords" content="IP configuration, DHCP, subnetting, duplicate IP addresses, network troubleshooting, IT internship, APIPA">
-    
+    <meta name="description"
+        content="Daily IP configuration troubleshooting stories from hotel IT internship. Learn about DHCP issues, duplicate IPs, subnetting, and network addressing problems.">
+    <meta name="keywords"
+        content="IP configuration, DHCP, subnetting, duplicate IP addresses, network troubleshooting, IT internship, APIPA">
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
+
     <style>
         :root {
             --bg-primary: #FEFEFE;
@@ -24,25 +29,25 @@
             --accent-gold: #D4AF37;
             --bg-subtle: #F8F8F8;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.7;
         }
-        
+
         .font-display {
             font-family: 'Playfair Display', serif;
         }
-        
+
         .gradient-text {
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .reading-progress {
             position: fixed;
             top: 0;
@@ -53,12 +58,12 @@
             z-index: 60;
             transition: width 0.3s ease;
         }
-        
+
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -69,11 +74,11 @@
             background: var(--accent-gold);
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         .article-content h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.875rem;
@@ -81,7 +86,7 @@
             margin: 2rem 0 1rem 0;
             color: var(--text-primary);
         }
-        
+
         .article-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
@@ -89,22 +94,22 @@
             margin: 1.5rem 0 0.75rem 0;
             color: var(--text-primary);
         }
-        
+
         .article-content p {
             margin-bottom: 1.5rem;
             color: var(--text-secondary);
         }
-        
+
         .article-content ul {
             margin: 1.5rem 0;
             padding-left: 1.5rem;
         }
-        
+
         .article-content li {
             margin-bottom: 0.5rem;
             color: var(--text-secondary);
         }
-        
+
         .highlight-box {
             background: var(--bg-subtle);
             border-left: 4px solid var(--accent-gold);
@@ -112,7 +117,7 @@
             margin: 2rem 0;
             border-radius: 0 8px 8px 0;
         }
-        
+
         .ip-address-demo {
             background: #f8f9fa;
             border: 1px solid #dee2e6;
@@ -121,17 +126,18 @@
             margin: 1.5rem 0;
             font-family: 'Courier New', monospace;
         }
-        
+
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
         }
     </style>
 </head>
+
 <body>
     <!-- Reading Progress Bar -->
     <div class="reading-progress"></div>
-    
+
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -141,8 +147,10 @@
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Home</a>
-                    <a href="index.html#articles" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
-                    <a href="mailto:[email protected]" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+                    <a href="index.html#articles"
+                        class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                    <a href="mailto:[email protected]"
+                        class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
                 </div>
             </div>
         </div>
@@ -163,13 +171,15 @@
                     IP Address Configuration – My Daily Morning Routine
                 </h1>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed fade-in">
-                    Every single morning started the same way: grab coffee, check tickets, and find computers that "just stopped working overnight."
+                    Every single morning started the same way: grab coffee, check tickets, and find computers that "just
+                    stopped working overnight."
                 </p>
             </div>
-            
+
             <!-- Hero Image -->
             <div class="rounded-lg overflow-hidden mb-8 fade-in">
-                <img src="resources/hero3.jpg" alt="IP address configuration and networking" class="w-full h-64 md:h-80 object-cover">
+                <img src="resources/hero3.jpg" alt="IP address configuration and networking"
+                    class="w-full h-64 md:h-80 object-cover">
             </div>
         </div>
     </section>
@@ -178,29 +188,36 @@
     <article class="article-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div class="prose prose-lg max-w-none">
             <p class="text-xl text-gray-700 leading-relaxed mb-8 fade-in">
-                Nine times out of ten? IP configuration problems. Here's what I learned about the daily grind of network troubleshooting and why understanding IP addressing became my superpower.
+                Nine times out of ten? IP configuration problems. Here's what I learned about the daily grind of network
+                troubleshooting and why understanding IP addressing became my superpower.
             </p>
 
             <h2>The Common Culprits I Encountered</h2>
-            
+
             <p class="fade-in">
-                Staff computers would mysteriously lose network access overnight. After handling dozens of these cases, I started recognizing the patterns. The usual suspects were always the same:
+                Staff computers would mysteriously lose network access overnight. After handling dozens of these cases,
+                I started recognizing the patterns. The usual suspects were always the same:
             </p>
 
             <div class="highlight-box fade-in">
                 <p class="font-semibold text-gray-800 mb-3">Most Frequent IP Issues:</p>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Incorrect default gateway settings</strong> - someone manually changed it thinking it would help</li>
-                    <li><strong>Wrong subnet masks</strong> - entered during "quick fixes" that caused more problems</li>
-                    <li><strong>Duplicate IP addresses</strong> - this was the most frequent and most frustrating issue</li>
+                    <li><strong>Incorrect default gateway settings</strong> - someone manually changed it thinking it
+                        would help</li>
+                    <li><strong>Wrong subnet masks</strong> - entered during "quick fixes" that caused more problems
+                    </li>
+                    <li><strong>Duplicate IP addresses</strong> - this was the most frequent and most frustrating issue
+                    </li>
                     <li><strong>Static IPs configured</strong> - when DHCP was the standard and caused conflicts</li>
                 </ul>
             </div>
 
             <h2>The Duplicate IP Nightmare</h2>
-            
+
             <p class="fade-in">
-                Duplicate IPs were my arch-enemy. Picture this: Two computers trying to use the same address, both randomly connecting and disconnecting. Users would call saying their network worked "sometimes" but not consistently. Frustrating for everyone involved.
+                Duplicate IPs were my arch-enemy. Picture this: Two computers trying to use the same address, both
+                randomly connecting and disconnecting. Users would call saying their network worked "sometimes" but not
+                consistently. Frustrating for everyone involved.
             </p>
 
             <div class="ip-address-demo fade-in">
@@ -211,13 +228,17 @@
             </div>
 
             <p class="fade-in">
-                My solution? I created a detailed spreadsheet tracking every device's MAC address and assigned IP. Sounds basic, maybe even tedious, but it saved me hours of troubleshooting. Whenever someone reported network issues, I'd check my sheet first.
+                My solution? I created a detailed spreadsheet tracking every device's MAC address and assigned IP.
+                Sounds basic, maybe even tedious, but it saved me hours of troubleshooting. Whenever someone reported
+                network issues, I'd check my sheet first.
             </p>
 
             <h2>Learning Subnetting the Hard Way</h2>
-            
+
             <p class="fade-in">
-                Understanding subnetting theoretically versus practically are two completely different things. In class, I could calculate subnet masks on paper. But at the hotel, I had to understand WHY the front desk computers were on 192.168.10.x while the back office used 192.168.20.x.
+                Understanding subnetting theoretically versus practically are two completely different things. In class,
+                I could calculate subnet masks on paper. But at the hotel, I had to understand WHY the front desk
+                computers were on 192.168.10.x while the back office used 192.168.20.x.
             </p>
 
             <div class="highlight-box fade-in">
@@ -232,13 +253,16 @@
             </div>
 
             <p class="fade-in">
-                Different departments, different subnets, better organization and security. This logical separation meant that if the restaurant's POS system had issues, it wouldn't affect front desk operations. It also made troubleshooting easier since problems were contained within specific network segments.
+                Different departments, different subnets, better organization and security. This logical separation
+                meant that if the restaurant's POS system had issues, it wouldn't affect front desk operations. It also
+                made troubleshooting easier since problems were contained within specific network segments.
             </p>
 
             <h2>The Spreadsheet That Saved My Sanity</h2>
-            
+
             <p class="fade-in">
-                That spreadsheet I created became the hotel's unofficial network documentation. It wasn't fancy, just columns for:
+                That spreadsheet I created became the hotel's unofficial network documentation. It wasn't fancy, just
+                columns for:
             </p>
 
             <ul class="fade-in">
@@ -252,15 +276,19 @@
 
             <div class="highlight-box fade-in">
                 <p class="font-semibold text-gray-800 mb-2">Pro Tip:</p>
-                <p>If their MAC address matched a different IP than what the computer was using, I knew exactly what went wrong. This simple verification process became my first troubleshooting step and solved 80% of issues immediately.</p>
+                <p>If their MAC address matched a different IP than what the computer was using, I knew exactly what
+                    went wrong. This simple verification process became my first troubleshooting step and solved 80% of
+                    issues immediately.</p>
             </div>
 
             <p class="fade-in">
-                After handling dozens of these issues, IP networking stopped being intimidating. It became second nature. Now when I see an IP address, I automatically think about the subnet it belongs to, the gateway it should use, and potential conflicts that might exist.
+                After handling dozens of these issues, IP networking stopped being intimidating. It became second
+                nature. Now when I see an IP address, I automatically think about the subnet it belongs to, the gateway
+                it should use, and potential conflicts that might exist.
             </p>
 
             <h2>Common Solutions That Actually Worked</h2>
-            
+
             <p class="fade-in">
                 Here are the fixes that solved 90% of my daily IP configuration problems:
             </p>
@@ -268,19 +296,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 fade-in">
                     <h4 class="font-semibold text-blue-800 mb-2">For Duplicate IPs:</h4>
-                    <p class="text-sm text-blue-700">Release and renew DHCP lease, or reassign static IP from documented pool</p>
+                    <p class="text-sm text-blue-700">Release and renew DHCP lease, or reassign static IP from documented
+                        pool</p>
                 </div>
-                
+
                 <div class="bg-green-50 border border-green-200 rounded-lg p-4 fade-in">
                     <h4 class="font-semibold text-green-800 mb-2">For Gateway Issues:</h4>
                     <p class="text-sm text-green-700">Verify correct gateway IP for the subnet, usually .1 or .254</p>
                 </div>
-                
+
                 <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 fade-in">
                     <h4 class="font-semibold text-yellow-800 mb-2">For Subnet Problems:</h4>
-                    <p class="text-sm text-yellow-700">Check if subnet mask matches the network design (usually /24 or 255.255.255.0)</p>
+                    <p class="text-sm text-yellow-700">Check if subnet mask matches the network design (usually /24 or
+                        255.255.255.0)</p>
                 </div>
-                
+
                 <div class="bg-red-50 border border-red-200 rounded-lg p-4 fade-in">
                     <h4 class="font-semibold text-red-800 mb-2">For DHCP Failures:</h4>
                     <p class="text-sm text-red-700">Check DHCP server status and scope availability</p>
@@ -288,31 +318,40 @@
             </div>
 
             <h2>The Legacy of That Spreadsheet</h2>
-            
+
             <p class="fade-in">
-                That spreadsheet I created? My supervisor still uses it. Apparently, I left behind something useful, which feels pretty good. It wasn't just a troubleshooting tool—it became the foundation for proper network documentation.
+                That spreadsheet I created? My supervisor still uses it. Apparently, I left behind something useful,
+                which feels pretty good. It wasn't just a troubleshooting tool—it became the foundation for proper
+                network documentation.
             </p>
 
             <p class="fade-in">
-                The experience taught me that good IT isn't always about having the most advanced tools or knowing the most complex configurations. Sometimes it's about being systematic, documenting what you learn, and creating processes that make problems easier to solve.
+                The experience taught me that good IT isn't always about having the most advanced tools or knowing the
+                most complex configurations. Sometimes it's about being systematic, documenting what you learn, and
+                creating processes that make problems easier to solve.
             </p>
 
             <div class="highlight-box fade-in">
                 <p class="font-semibold text-gray-800 mb-2">Key Takeaway:</p>
-                <p>Understanding IP addressing at a practical level—knowing how to read the signs, spot the patterns, and solve the real problems that affect real people every day. That's what makes someone valuable in IT.</p>
+                <p>Understanding IP addressing at a practical level—knowing how to read the signs, spot the patterns,
+                    and solve the real problems that affect real people every day. That's what makes someone valuable in
+                    IT.</p>
             </div>
         </div>
 
         <!-- Author Bio -->
         <div class="mt-16 p-8 bg-gray-50 rounded-lg fade-in">
             <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div
+                    class="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                     A
                 </div>
                 <div>
                     <h3 class="font-display font-bold text-lg text-gray-900 mb-2">About the Author</h3>
                     <p class="text-gray-600 leading-relaxed">
-                        I'm Tarun Mehra, a B.Sc. IT Student & Cloud Network Specialist passionate about cloud infrastructure, network administration, and building scalable solutions. Currently mastering AWS, Linux systems, and network automation at Guru Nanak Dev University.
+                        I'm Tarun Mehra, a B.Sc. IT Student & Cloud Network Specialist passionate about cloud
+                        infrastructure, network administration, and building scalable solutions. Currently mastering
+                        AWS, Linux systems, and network automation at Guru Nanak Dev University.
                     </p>
                 </div>
             </div>
@@ -322,13 +361,19 @@
         <div class="mt-16 fade-in">
             <h3 class="font-display font-bold text-2xl mb-8 text-center">Related Stories</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <a href="article1.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
-                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">Wi-Fi Issues at Five-Star Hotel</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">Two months of Wi-Fi troubleshooting taught me practical networking lessons I'll never forget.</p>
+                <a href="wifi-issues-at-five-star-hotel.html"
+                    class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">Wi-Fi Issues
+                        at Five-Star Hotel</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Two months of Wi-Fi troubleshooting taught me
+                        practical networking lessons I'll never forget.</p>
                 </a>
-                <a href="article2.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
-                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">VLANs Made Sense in Action</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">Network segmentation theory became reality when I saw five VLANs working together at the hotel.</p>
+                <a href="vlans-in-action.html"
+                    class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">VLANs Made
+                        Sense in Action</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Network segmentation theory became reality when I
+                        saw five VLANs working together at the hotel.</p>
                 </a>
             </div>
         </div>
@@ -339,7 +384,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <p class="text-gray-400 mb-6">
-                    <a href="https://tarunmehra.site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">tarunmehra.site</a>
+                    <a href="https://tarunmehra.site" target="_blank" rel="noopener noreferrer"
+                        class="hover:text-white transition-colors">tarunmehra.site</a>
                 </p>
                 <p class="text-gray-500 text-sm">
                     © 2025 Tarun Mehra. All rights reserved.
@@ -350,9 +396,9 @@
 
     <script>
         // Initialize fade-in animations
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const fadeElements = document.querySelectorAll('.fade-in');
-            
+
             fadeElements.forEach((element, index) => {
                 gsap.to(element, {
                     opacity: 1,
@@ -366,4 +412,5 @@
     </script>
     <script src="main.js"></script>
 </body>
+
 </html>
