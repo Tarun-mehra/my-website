@@ -18,7 +18,7 @@ Sitemap: https://tarunmehra.site/sitemap.xml
 # Disallow: /admin/
 # Disallow: /private/
 # Disallow: /temp/
-
+# Disallow: /staging/
 # Allow Google Image indexing
 User-agent: Googlebot-Image
 Allow: /
