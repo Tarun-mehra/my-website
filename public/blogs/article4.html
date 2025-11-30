@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Linux Became My Favorite Operating System (Unexpectedly) - Tarun Mehra</title>
+    <meta name="description" content="Personal journey from Linux resistance to Linux advocacy. Learn how command-line interfaces and terminal commands changed my approach to problem-solving.">
+    <meta name="keywords" content="Linux, command line, terminal, system administration, B.Sc IT projects, Linux commands, SSH, shell scripting">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #2C2C2C;
+            --text-secondary: #6B6B6B;
+            --accent-gold: #D4AF37;
+            --bg-subtle: #F8F8F8;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), #B8860B);
+            z-index: 60;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .article-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+        
+        .article-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--text-primary);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .article-content ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: var(--bg-subtle);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .terminal-window {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .command-prompt {
+            color: #ffffff;
+        }
+        
+        .command-output {
+            color: #00ff00;
+            margin-top: 0.5rem;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl gradient-text">
+                    <a href="index.html">Tarun Mehra</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Home</a>
+                    <a href="index.html#articles" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                    <a href="mailto:[email protected]" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
+                    <span>Linux</span>
+                    <span class="mx-2">•</span>
+                    <span>5 min read</span>
+                    <span class="mx-2">•</span>
+                    <span>December 2024</span>
+                </div>
+                <h1 class="font-display font-black text-3xl md:text-5xl lg:text-6xl leading-tight mb-6 fade-in">
+                    Why Linux Became My Favorite Operating System (Unexpectedly)
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed fade-in">
+                    I'll be honest – when our professor announced we'd be using Linux for several B.Sc IT projects, my first thought was "great, this is going to be complicated." And it was. At first.
+                </p>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="rounded-lg overflow-hidden mb-8 fade-in">
+                <img src="resources/hero4.jpg" alt="Linux command line interface and terminal" class="w-full h-64 md:h-80 object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8 fade-in">
+                Windows had been my comfort zone forever. Everything had familiar buttons and menus. Linux felt like learning computers all over again from scratch. But somewhere around the two-month mark, something shifted.
+            </p>
+
+            <h2>The Frustrating First Month</h2>
+            
+            <p class="fade-in">
+                Those initial weeks were rough. Installing software required typing commands instead of clicking "next, next, finish." Finding files meant navigating directory structures through terminal commands. Even basic tasks took three times longer than they would have on Windows.
+            </p>
+
+            <div class="terminal-window fade-in">
+                <div class="command-prompt">$ sudo apt-get install vim</div>
+                <div class="command-output">Reading package lists... Done</div>
+                <div class="command-output">Building dependency tree</div>
+                <div class="command-output">Reading state information... Done</div>
+                <div class="command-output">E: Unable to locate package vim</div>
+                <div class="command-prompt mt-4">$ sudo apt-get install vim</div>
+                <div class="command-output">(finally works after 45 minutes of typos)</div>
+            </div>
+
+            <p class="fade-in">
+                I remember spending 45 minutes trying to install a simple text editor because I kept mistyping the apt-get command. My classmate laughed when I finally succeeded and acted like I'd won a prize.
+            </p>
+
+            <h2>When Things Started Clicking</h2>
+            
+            <p class="fade-in">
+                But somewhere around the two-month mark, something shifted. The terminal stopped feeling intimidating and started feeling powerful. I could install multiple programs with a single command. Checking system logs in /var/log became faster than opening Windows Event Viewer.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">The Turning Point:</p>
+                <p>SSH let me manage my college's lab computer from my apartment. That was the moment I realized Linux wasn't just different—it was better for certain tasks. The ability to remotely manage systems efficiently changed everything.</p>
+            </div>
+
+            <p class="fade-in">
+                I started writing basic shell scripts to automate repetitive tasks – things like batch renaming files or backing up my project folders. Nothing fancy, but watching my scripts execute perfectly felt incredibly satisfying.
+            </p>
+
+            <h2>Commands That Changed Everything</h2>
+            
+            <p class="fade-in">
+                A few commands became my daily tools. Each one solved real problems I encountered. Not theoretical exam questions—actual issues I faced while working on projects.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-mono font-bold text-sm text-gray-800 mb-2">ifconfig / ip a</h4>
+                    <p class="text-sm text-gray-600">For checking network configuration and troubleshooting connectivity issues</p>
+                </div>
+                
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-mono font-bold text-sm text-gray-800 mb-2">htop</h4>
+                    <p class="text-sm text-gray-600">For monitoring system resources and identifying performance bottlenecks</p>
+                </div>
+                
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-mono font-bold text-sm text-gray-800 mb-2">grep</h4>
+                    <p class="text-sm text-gray-600">For searching through log files and finding specific information quickly</p>
+                </div>
+                
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-mono font-bold text-sm text-gray-800 mb-2">sudo apt update && sudo apt upgrade</h4>
+                    <p class="text-sm text-gray-600">For system maintenance and keeping packages current</p>
+                </div>
+            </div>
+
+            <div class="terminal-window fade-in">
+                <div class="command-prompt">$ htop</div>
+                <div class="command-output">(beautiful, colorful system monitor appears)</div>
+                <div class="command-prompt mt-4">$ grep "error" /var/log/syslog | tail -20</div>
+                <div class="command-output">(instantly shows last 20 error messages)</div>
+                <div class="command-prompt mt-4">$ ssh user@lab-server</div>
+                <div class="command-output">(remote access from anywhere)</div>
+            </div>
+
+            <h2>The Mindset Shift</h2>
+            
+            <p class="fade-in">
+                The biggest change wasn't technical knowledge. Linux changed how I approach problems. Windows often hides what's happening behind the scenes. Linux forces you to understand the "why" behind everything. This made me more methodical and logical in my thinking.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Problem-Solving Evolution:</p>
+                <p>Instead of "click until it works," I started thinking "what's actually happening here?" Linux's transparency forced me to understand system architecture, process management, and network stacks at a deeper level.</p>
+            </div>
+
+            <p class="fade-in">
+                When something breaks in Linux, you can't just reboot and hope for the best. You investigate logs, check processes, verify configurations. This systematic approach to troubleshooting has served me well in every aspect of IT work.
+            </p>
+
+            <h2>Real-World Applications</h2>
+            
+            <p class="fade-in">
+                The skills I learned weren't just academic. During my internship, I used Linux commands to:
+            </p>
+
+            <ul class="fade-in">
+                <li>Monitor server performance during peak hours</li>
+                <li>Automate backup scripts for critical data</li>
+                <li>Troubleshoot network connectivity issues</li>
+                <li>Search through massive log files for specific errors</li>
+                <li>Manage remote systems without physical access</li>
+            </ul>
+
+            <p class="fade-in">
+                Each task reinforced the idea that Linux wasn't just an alternative operating system—it was a professional tool that made me more efficient and effective at my job.
+            </p>
+
+            <h2>The Unexpected Conversion</h2>
+            
+            <p class="fade-in">
+                Now I run Linux on my personal laptop, and Windows feels limiting by comparison. Never thought I'd say that six months ago, but here we are. Sometimes the things you resist learning end up being the most valuable.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">The Linux Advantage:</p>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Complete control over your system</li>
+                    <li>Powerful command-line tools for automation</li>
+                    <li>Better resource utilization on older hardware</li>
+                    <li>Transparent system architecture</li>
+                    <li>Strong security model and regular updates</li>
+                    <li>Excellent for development and server management</li>
+                </ul>
+            </div>
+
+            <p class="fade-in">
+                The journey from Linux skeptic to Linux advocate taught me something important: sometimes the best learning experiences come from the things that initially seem most difficult or uncomfortable.
+            </p>
+
+            <p class="fade-in">
+                That frustrating first month? It was actually building the foundation for skills that I use every day now. The commands that seemed cryptic and unnecessary? They're now second nature and incredibly useful.
+            </p>
+
+            <h2>Lessons for Future IT Professionals</h2>
+            
+            <p class="fade-in">
+                If you're starting your IT journey and facing something that seems unnecessarily difficult, embrace it. That difficulty might be teaching you exactly what you need to know to excel in your career.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Key Takeaways:</p>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Comfort zones are the enemy of growth</li>
+                    <li>Command-line skills are invaluable in IT</li>
+                    <li>Understanding system architecture makes you a better troubleshooter</li>
+                    <li>Automation skills separate good IT professionals from great ones</li>
+                    <li>The tools that seem hardest to learn often provide the most value</li>
+                </ul>
+            </div>
+
+            <p class="fade-in">
+                Linux didn't just teach me a new operating system—it taught me a new way of thinking about technology, problem-solving, and learning itself. And that's something I'll carry with me throughout my entire career.
+            </p>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="mt-16 p-8 bg-gray-50 rounded-lg fade-in">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    A
+                </div>
+                <div>
+                    <h3 class="font-display font-bold text-lg text-gray-900 mb-2">About the Author</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        I'm Tarun Mehra, a B.Sc. IT Student & Cloud Network Specialist passionate about cloud infrastructure, network administration, and building scalable solutions. Currently mastering AWS, Linux systems, and network automation at Guru Nanak Dev University.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Articles -->
+        <div class="mt-16 fade-in">
+            <h3 class="font-display font-bold text-2xl mb-8 text-center">Related Stories</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="article5.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">The Day Everything Went Wrong</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Witnessing a system failure and backup restoration taught me why preparation is everything in IT.</p>
+                </a>
+                <a href="article6.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">How Packet Tracer Prepared Me</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Network simulation vs. reality—what Cisco Packet Tracer taught me about real networking challenges.</p>
+                </a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400 mb-6">
+                    <a href="https://tarunmehra.site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">tarunmehra.site</a>
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 Tarun Mehra. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach((element, index) => {
+                gsap.to(element, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

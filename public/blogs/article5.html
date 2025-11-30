@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Day Everything Went Wrong (And I Learned About Backups) - Tarun Mehra</title>
+    <meta name="description" content="Real-world backup and disaster recovery story from hotel IT internship. Learn why automated backups are critical and how proper preparation saves the day.">
+    <meta name="keywords" content="backup and recovery, system failure, disaster recovery, automated backups, IT internship, data restoration, business continuity">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #2C2C2C;
+            --text-secondary: #6B6B6B;
+            --accent-gold: #D4AF37;
+            --bg-subtle: #F8F8F8;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), #B8860B);
+            z-index: 60;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .article-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+        
+        .article-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--text-primary);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .article-content ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: var(--bg-subtle);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-gold);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-bold text-xl gradient-text">
+                    <a href="index.html">Tarun Mehra</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Home</a>
+                    <a href="index.html#articles" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Articles</a>
+                    <a href="mailto:[email protected]" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
+                    <span>System Administration</span>
+                    <span class="mx-2">•</span>
+                    <span>6 min read</span>
+                    <span class="mx-2">•</span>
+                    <span>December 2024</span>
+                </div>
+                <h1 class="font-display font-black text-3xl md:text-5xl lg:text-6xl leading-tight mb-6 fade-in">
+                    The Day Everything Went Wrong (And I Learned About Backups)
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed fade-in">
+                    There's one day from my internship I'll probably never forget. Not because something went spectacularly right, but because I witnessed what happens when systems fail and proper backups save the day.
+                </p>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="rounded-lg overflow-hidden mb-8 fade-in">
+                <img src="resources/hero5.jpg" alt="Data backup and system recovery" class="w-full h-64 md:h-80 object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8 fade-in">
+                Before that day, backups were just another IT concept I knew existed. Afterwards, I viscerally understood why they're non-negotiable. This is the story of how one disaster became my most valuable learning experience.
+            </p>
+
+            <h2>The Morning Everything Slowed Down</h2>
+            
+            <p class="fade-in">
+                It was a Tuesday morning, around 9 AM. The front desk called reporting that the property management system was "extremely slow." In hotel terms, that's code for "we're losing money every minute this isn't fixed."
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Critical System Impact:</p>
+                <p>This system handled everything – room bookings, check-ins, check-outs, billing, housekeeping assignments. When it lagged, the entire hotel operation suffered. Guest check-outs were taking 5-10 minutes instead of 30 seconds.</p>
+            </div>
+
+            <p class="fade-in">
+                My supervisor rushed over to the server room (and I followed, trying to look helpful rather than nervous). The billing server was crawling. Database queries that normally took seconds were timing out. The stress was palpable.
+            </p>
+
+            <h2>Decision Time: Restore from Backup</h2>
+            
+            <p class="fade-in">
+                After 20 minutes of troubleshooting, my supervisor made the call – we needed to restore from last night's backup. He explained it to management, got approval, and started the process. I mostly watched and handed him cables, but I paid attention to every single step.
+            </p>
+
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <h4 class="font-semibold text-lg mb-2">9:20 AM - Decision Made</h4>
+                    <p class="text-sm text-gray-600">Supervisor determined restoration was necessary after failed troubleshooting attempts</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="font-semibold text-lg mb-2">9:25 AM - Management Approval</h4>
+                    <p class="text-sm text-gray-600">Explained the situation to hotel management and got restoration approval</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="font-semibold text-lg mb-2">9:30 AM - Backup Verification</h4>
+                    <p class="text-sm text-gray-600">Verified backup file integrity before proceeding (crucial step!)</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="font-semibold text-lg mb-2">9:35 AM - Restoration Begins</h4>
+                    <p class="text-sm text-gray-600">Initiated snapshot restoration from last night's automated backup</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="font-semibold text-lg mb-2">11:05 AM - System Online</h4>
+                    <p class="text-sm text-gray-600">Full restoration complete, system performance back to normal</p>
+                </div>
+            </div>
+
+            <h2>What I Learned While Watching</h2>
+            
+            <p class="fade-in">
+                The hotel had automated nightly backups that ran at 2 AM when system usage was lowest. They kept daily backups for a week, weekly backups for a month, and monthly backups for a year. This redundancy meant we had multiple restore points to choose from.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Backup Strategy Details:</p>
+                <ul class="list-disc list-inside space-y-1">
+                    <li><strong>Daily backups:</strong> Kept for 7 days (fast restoration)</li>
+                    <li><strong>Weekly backups:</strong> Kept for 4 weeks (medium-term recovery)</li>
+                    <li><strong>Monthly backups:</strong> Kept for 12 months (long-term archival)</li>
+                    <li><strong>Offsite storage:</strong> Critical backups stored at separate location</li>
+                    <li><strong>Integrity verification:</strong> Automated checks for backup corruption</li>
+                </ul>
+            </div>
+
+            <p class="fade-in">
+                My supervisor verified the backup file integrity before restoring—apparently there's nothing worse than discovering your backup is corrupted AFTER you've wiped the current system. Once confirmed, he initiated the snapshot restoration.
+            </p>
+
+            <h2>The Math of Disaster Recovery</h2>
+            
+            <p class="fade-in">
+                The whole process took about 90 minutes. We lost roughly 7 hours of data (from 2 AM to 9 AM), but the hotel had been relatively quiet during those hours. Only three check-ins and one check-out needed to be re-entered manually.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-semibold text-red-800 mb-2">Without Backups</h4>
+                    <p class="text-sm text-red-700">Days of downtime, potential data loss, massive revenue impact</p>
+                </div>
+                
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Manual Recovery</h4>
+                    <p class="text-sm text-yellow-700">Hours of manual work, inconsistent data, guest frustration</p>
+                </div>
+                
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 fade-in">
+                    <h4 class="font-semibold text-green-800 mb-2">Automated Restore</h4>
+                    <p class="text-sm text-green-700">90 minutes downtime, minimal data loss, business continuity</p>
+                </div>
+            </div>
+
+            <h2>Why This Experience Mattered</h2>
+            
+            <p class="fade-in">
+                Before that day, backups were just another IT concept I knew existed. Afterwards, I viscerally understood why they're non-negotiable. I saw the stress on my supervisor's face. I heard the front desk manager's worried voice. I witnessed how quickly everything could go wrong.
+            </p>
+
+            <p class="fade-in">
+                More importantly, I saw how preparation saved the day. Because someone (probably my supervisor) had set up proper automated backups months or years ago, this disaster turned into a manageable 90-minute inconvenience instead of a catastrophic data loss.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">Key Lessons:</p>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Automated backups are not optional—they're essential</li>
+                    <li>Test your backup integrity regularly</li>
+                    <li>Multiple backup retention periods provide flexibility</li>
+                    <li>Offsite storage protects against physical disasters</li>
+                    <li>Document your recovery procedures</li>
+                    <li>Practice restoration procedures before you need them</li>
+                </ul>
+            </div>
+
+            <h2>The Human Element</h2>
+            
+            <p class="fade-in">
+                What struck me most was the human impact. The relief on my supervisor's face when the backup verification passed. The front desk staff's gratitude when they could finally process checkouts normally. The guests who never even knew there was a problem.
+            </p>
+
+            <p class="fade-in">
+                This wasn't just about technology—it was about protecting people's ability to do their jobs and serve customers effectively. Good IT isn't just about keeping systems running; it's about enabling business success.
+            </p>
+
+            <h2>Implementing What I Learned</h2>
+            
+            <p class="fade-in">
+                Now whenever I work on any system – even personal projects – backups are the first thing I set up. Not the last. Not "eventually." The first. That Tuesday morning taught me that lesson permanently.
+            </p>
+
+            <div class="highlight-box fade-in">
+                <p class="font-semibold text-gray-800 mb-2">My Backup Checklist:</p>
+                <ul class="list-disc list-inside space-y-1">
+                    <li>Automated daily backups with appropriate retention</li>
+                    <li>Regular integrity verification of backup files</li>
+                    <li>Multiple storage locations (local and offsite)</li>
+                    <li>Documented restoration procedures</li>
+                    <li>Periodic recovery testing</li>
+                    <li>Clear communication plan for disaster scenarios</li>
+                </ul>
+            </div>
+
+            <p class="fade-in">
+                The experience also taught me about the importance of monitoring and alerting. The problem had been building for days, but without proper monitoring, we didn't see it coming. Now I always implement comprehensive monitoring alongside backup solutions.
+            </p>
+
+            <h2>The Business Impact</h2>
+            
+            <p class="fade-in">
+                In financial terms, that backup system probably saved the hotel thousands of dollars in lost revenue and productivity. But the real value was in maintaining guest satisfaction and staff confidence. When systems work reliably, everyone can focus on their actual jobs instead of fighting technology.
+            </p>
+
+            <p class="fade-in">
+                That day taught me that IT professionals are guardians of business continuity. We don't just fix computers—we protect the organization's ability to function. And sometimes, the most important work we do is the preparation that hopefully never gets noticed.
+            </p>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="mt-16 p-8 bg-gray-50 rounded-lg fade-in">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    A
+                </div>
+                <div>
+                    <h3 class="font-display font-bold text-lg text-gray-900 mb-2">About the Author</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        I'm Tarun Mehra, a B.Sc. IT Student & Cloud Network Specialist passionate about cloud infrastructure, network administration, and building scalable solutions. Currently mastering AWS, Linux systems, and network automation at Guru Nanak Dev University.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Articles -->
+        <div class="mt-16 fade-in">
+            <h3 class="font-display font-bold text-2xl mb-8 text-center">Related Stories</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="article4.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">Why Linux Became My Favorite OS</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">From Linux resistance to Linux advocacy—how command-line skills changed my approach to problem-solving.</p>
+                </a>
+                <a href="article6.html" class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                    <h4 class="font-display font-bold text-lg mb-3 text-gray-900 group-hover:text-gray-700">How Packet Tracer Prepared Me</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Network simulation vs. reality—bridging the gap between theory and practice in networking.</p>
+                </a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400 mb-6">
+                    <a href="https://tarunmehra.site" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">tarunmehra.site</a>
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 Tarun Mehra. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach((element, index) => {
+                gsap.to(element, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
