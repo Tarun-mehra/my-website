@@ -56,6 +56,9 @@
     <!-- PERFORMANCE -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap" rel="stylesheet">
 
     <!-- STRUCTURED DATA -->
     <script type="application/ld+json">
@@ -87,7 +90,7 @@
         }
 
         :root {
-            --blue: #2563eb;
+            --blue: #0a0a0a;
             --blue-dark: #1e40af;
             --white: #ffffff;
             --gray: #6b7280;
@@ -117,10 +120,13 @@
             align-items: center;
             z-index: 1000;
             transition: all 0.3s ease;
+            /* white background at 8% opacity as requested */
+            background: rgba(14, 13, 14, 0.08);
         }
 
         nav.scrolled {
-            background: rgba(0, 0, 0, 0.95);
+            /* keep the translucent white when scrolled as well */
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             padding: 1.5rem 4rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -133,6 +139,12 @@
             letter-spacing: -0.02em;
             color: var(--white);
             transition: transform 0.3s ease;
+        }
+
+        /* color only for the "Mehra" part of the logo */
+        .logo-mehra {
+            color: #8A36F5;
+            font-weight: 300;
         }
 
         .logo:hover {
@@ -279,17 +291,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+            background: #000000; /* pure black */
             padding: 8rem 4rem 4rem;
         }
 
+        /* remove blue radial highlights for pure-black hero */
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            background: transparent;
             z-index: 1;
         }
 
@@ -302,11 +313,163 @@
             width: 100%;
         }
 
+        /* responsive hero image placed under the subheading */
+        .hero-image {
+            display: block;
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            margin: 1.5rem auto 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        /* make main image sit above decorative back image */
+        .hero-image { position: relative; z-index: 3; }
+
+        /* large decorative image that sits behind the main image */
+        .hero-image-back {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;
+            max-width: none;
+            opacity: 0.16;
+            pointer-events: none;
+            z-index: 1;
+            /* heavy layer blur as requested */
+            filter: blur(700px);
+            -webkit-filter: blur(700px);
+        }
+            /* centered decorative ellipse inside hero */
+            .hero-ellipse-center {
+                position: absolute;
+                right : 30%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 60%;
+                max-width: 900px;
+                opacity: 100%;
+                pointer-events: none;
+                z-index: 2; /* behind main hero content (which has higher stacking) */
+            }
+
+            /* centered blurred circle behind page content */
+            .center-circle {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 36vw;
+                height: 36vw;
+                max-width: 640px;
+                max-height: 640px;
+                background: #7127BA; /* purple */
+                border-radius: 50%;
+                opacity: 0.12;
+                pointer-events: none;
+                z-index: 0; /* behind main content (nav/sections have z-index:1) */
+                filter: blur(150px);
+                -webkit-filter: blur(150px);
+            }
+
+            @media (max-width: 480px) {
+                .center-circle { width: 60vw; height: 60vw; opacity: 0.10; }
+            }
+
+        /* bottom-centered blurred decorative layer (behind everything) */
+        .hero-bottom-blur {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -120px;
+            width: 900px;
+            max-width: 95%;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(700px);
+            -webkit-filter: blur(700px);
+        }
+
+        /* wrapper for the hero image so we can overlay vector.png */
+        .hero-image-wrap {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            margin: 1.5rem auto 0;
+        }
+
+
+
+        .hero-image-caption {
+            position: absolute;
+            left: 8%;
+            bottom: 10%;
+            color: #ffffff;
+            background: rgba(0,0,0,0.45);
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            font-family: -apple-system, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 767px) {
+            .hero-vector-img {
+                right: 50%;
+                left: 50%;
+                top: 6%;
+                transform: translate(50%, 0);
+            }
+
+            .hero-image-caption {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 6%;
+            }
+        }
+
+        /* text wrapper so we can switch layout responsively */
+        .hero-text {
+            width: 100%;
+        }
+
+        /* On larger screens, layout hero content in two columns and show image on the left */
+        @media (min-width: 1024px) {
+            .hero-content {
+                display: flex;
+                align-items: center;
+                gap: 3rem;
+                text-align: left;
+                justify-content: space-between;
+            }
+
+            /* reverse order so the image (which is after text in DOM) appears on the left */
+            .hero-content {
+                flex-direction: row-reverse;
+            }
+
+            .hero-text {
+                flex: 1 1 60%;
+            }
+
+            .hero-image {
+                flex: 0 0 360px;
+                max-width: 360px;
+                margin: 0;
+                align-self: center;
+            }
+        }
+
         .hero-badge {
             display: inline-block;
             padding: 0.6rem 1.8rem;
-            background: rgba(37, 99, 235, 0.15);
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.03);
             border-radius: 50px;
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -314,7 +477,6 @@
             color: rgba(255, 255, 255, 0.9);
             font-family: -apple-system, sans-serif;
             margin-bottom: 2.5rem;
-            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
@@ -331,13 +493,33 @@
             display: block;
         }
 
+        /* make highlight plain white (no blue), so it remains visible on a black hero */
         .hero-title .highlight {
-            background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             font-weight: 400;
         }
+
+        /* Rainbow gradient for specific hero words (applied to "UI/UX designer")
+           Adjusted to use normal weight so it doesn't appear overly bold. */
+        .rainbow-word {
+            display: inline-block;
+            background-image: linear-gradient(90deg, #FF4D4D, #FF9A4D, #F3FF4D, #4DFF9A, #4DA6FF, #A34DFF, #FF4DBD);
+            background-size: 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 1px 0 rgba(0,0,0,0.18));
+            text-shadow: 0 1px 0 rgba(255,255,255,0.02);
+            font-weight: 400; /* keep non-bold per your preference */
+            transition: background-position 0.8s ease;
+        }
+
+        /* optional wider gradient variant */
+        .rainbow-word.wide { background-size: 300%; }
+
+        /* subtle hover sweep */
+        .rainbow-word:hover { background-position: 100% 0; }
 
         .hero-description {
             font-size: clamp(1rem, 2vw, 1.2rem);
@@ -367,15 +549,15 @@
         }
 
         .stat-item:hover {
-            background: rgba(37, 99, 235, 0.1);
-            border-color: rgba(37, 99, 235, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(48, 49, 49, 0.3);
             transform: translateY(-5px);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 300;
-            color: var(--blue);
+            color: #ffffff;
             display: block;
             line-height: 1;
             margin-bottom: 0.5rem;
@@ -417,14 +599,14 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            border-color: #3b82f6;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #000000, #000000); /* pure black */
+            border-color: #000000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.6);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
         }
 
         .btn-secondary:hover {
@@ -467,7 +649,7 @@
             left: 0;
             right: 0;
             height: 20px;
-            background: rgba(37, 99, 235, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             animation: scrollMove 2s infinite;
         }
 
@@ -884,8 +1066,10 @@
 </head>
 
 <body>
+    <!-- centered blurred circle layer -->
+    <div class="center-circle" aria-hidden="true"></div>
     <nav id="nav">
-        <div class="logo">Tarun Mehra</div>
+    <div class="logo">Tarun <span class="logo-mehra">Mehra</span></div>
         <ul class="nav-links">
             <li><a href="about.html">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -912,43 +1096,33 @@
 
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-badge">👋 Welcome to My Portfolio</div>
+            <div class="hero-text">
+                <div class="hero-badge">👋 Welcome to My Portfolio</div>
 
-            <h1 class="hero-title">
-                <span class="line">I'm <span class="highlight">Tarun Mehra</span></span>
-                <span class="line">BSc IT Student &</span>
-                <span class="line"><span class="highlight">Cloud Network</span> Specialist</span>
-            </h1>
+                <h1 class="hero-title">
+                    <span class="line">I'm <span class="highlight">Tarun Mehra</span></span>
+                    <span class="line">BSc IT Student &</span>
+                    <span class="line"><span class="rainbow-word">UI/UX designer</span></span>
+                </h1>
 
-            <p class="hero-description">
-                Passionate about cloud infrastructure, network administration, and building scalable solutions.
-                Currently mastering AWS, Linux systems, and network automation at Guru Nanak Dev University.
-            </p>
-
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">2+</span>
-                    <span class="stat-label">Years Experience</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Projects Done</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">Core Skills</span>
-                </div>
+                <p class="hero-description">
+                    Learning, building, and growing — one project at a time
+                </p>
             </div>
 
-            <div class="hero-buttons">
-                <a href="#work" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
-        </div>
+            <!-- inserted image under subheading (keeps DOM position for mobile) -->
+            <div class="hero-image-wrap">
+                <img src="image/image copy.png" alt="decorative large background" class="hero-image-back">
+                <img src="image/image.png" alt="Tarun Mehra" class="hero-image">
 
-        <div class="scroll-indicator">
-            <div class="scroll-indicator-text">Scroll Down</div>
-            <div class="scroll-indicator-line"></div>
+
+            </div>
+
+            <!-- hero stats and CTAs removed per user request -->
+
+            <!-- bottom-centered blurred decorative layer (place your file at public/image/image.copy.png) -->
+            <img src="image/image.copy.png" alt="decorative blur" class="hero-bottom-blur">
+
         </div>
     </section>
 
@@ -965,7 +1139,7 @@
                     in cloud networking, Linux server administration, and network automation.</p>
             </div>
             <div class="about-image">
-                <img src="image/Tarun-mehra-real-pic.jpg" alt="Technology workspace with laptop and coding">
+                <img src="image/Tarun-mehra-about-me.jpg" alt="Technology workspace with laptop and coding">
             </div>
         </div>
     </section>
@@ -1122,7 +1296,7 @@
             <div class="footer-links">
                 <a href="https://github.com/tarun-mehra" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://www.linkedin.com/in/tarunmehra1/" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://www.instagram.com/tarunmehra_real/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://www.instagram.com/tarunmehra617/" target="_blank" rel="noopener">Instagram</a>
                 <a href="mailto:info@tarunmehra.site">Email</a>
             </div>
             <div style="font-size: 0.75rem; opacity: 0.6; font-family: -apple-system, sans-serif;">© 2025 Tarun Mehra.
