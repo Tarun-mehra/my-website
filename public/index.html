@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
@@ -121,7 +122,7 @@
             z-index: 1000;
             transition: all 0.3s ease;
             /* white background at 8% opacity as requested */
-            background: rgba(14, 13, 14, 0.08);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         nav.scrolled {
@@ -1061,11 +1062,14 @@
                 flex-direction: column;
                 text-align: center;
             }
+            
         }
+        
     </style>
 </head>
 
 <body>
+    <div class="ui-half-circle"></div>
     <!-- centered blurred circle layer -->
     <div class="center-circle" aria-hidden="true"></div>
     <nav id="nav">
@@ -1258,22 +1262,54 @@
 
     <section class="contact-section" id="contact">
         <div class="contact-content">
-            <h2>Let's work together</h2>
+            <!-- vertical social icons (left side of contact area) -->
+            <div class="contact-social" aria-hidden="false">
+                <a class="social-link" href="https://github.com/tarun-mehra" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path fill="currentColor" d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.95 3.21 9.14 7.67 10.62.56.1.77-.24.77-.54 0-.27-.01-1.17-.02-2.12-3.12.68-3.78-1.5-3.78-1.5-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .17 1.56-.75 1.56-.75.98-1.67 2.56-1.19 3.19-.91.1-.72.39-1.19.71-1.46-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.42.11-2.96 0 0 .95-.3 3.12 1.16.9-.25 1.87-.37 2.83-.37.96 0 1.93.12 2.83.37 2.17-1.46 3.12-1.16 3.12-1.16.61 1.54.23 2.68.11 2.96.72.79 1.16 1.8 1.16 3.03 0 4.32-2.64 5.28-5.15 5.56.41.36.77 1.07.77 2.17 0 1.57-.01 2.83-.01 3.21 0 .3.21.65.78.54 4.46-1.49 7.66-5.67 7.66-10.62C23.25 5.48 18.27.5 12 .5z"/>
+                    </svg>
+                </a>
 
-            <form class="contact-form" id="contactForm" novalidate>
+                <a class="social-link" href="https://www.linkedin.com/in/tarunmehra1/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path fill="currentColor" d="M20.45 20.45h-3.55v-5.55c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.95v5.63H9.32V9h3.41v1.56h.05c.48-.9 1.66-1.85 3.42-1.85 3.66 0 4.34 2.41 4.34 5.54v6.2zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.07 0-1.14.92-2.06 2.06-2.06s2.06.92 2.06 2.06c0 1.14-.92 2.07-2.06 2.07zM7.12 20.45H3.55V9h3.57v11.45z"/>
+                    </svg>
+                </a>
+
+                <a class="social-link" href="https://www.instagram.com/tarunmehra617/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2A3.8 3.8 0 1 0 15.8 12 3.8 3.8 0 0 0 12 8.2zm4.9-2.6a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1z"/>
+                    </svg>
+                </a>
+
+                <a class="social-link" href="mailto:info@tarunmehra.site" aria-label="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Let's work together</h2>
+                    <p class="contact-lead">Have a project or idea? Send a short message — I'll respond within 48 hours. Prefer to share files or links? Paste them in the message.</p>
+                </div>
+
+                <form class="contact-form" id="contactForm" novalidate>
                 <!-- Hidden access key (do not remove) -->
                 <input type="hidden" name="access_key" value="a851b561-e231-4630-be9f-a4971b59f61c">
 
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-                    <div class="form-error">Please enter your name</div>
-                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="form-error">Please enter your name</div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                    <div class="form-error">Please enter a valid email</div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="form-error">Please enter a valid email</div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -1286,7 +1322,8 @@
 
                 <!-- small place to show success / error messages (styled by your CSS if you want) -->
                 <div id="contactFormStatus" aria-live="polite" style="margin-top:12px;"></div>
-            </form>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -1305,6 +1342,156 @@
     </footer>
 
     <style>
+        /* Contact section responsive styles */
+        .contact-section {
+            padding: 4rem 1.5rem;
+            background: transparent;
+            color: var(--white);
+        }
+
+        .contact-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative; /* needed for absolute-positioned social bar */
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            font-weight: 400;
+        }
+
+        .contact-lead {
+            color: rgba(255,255,255,0.75);
+            font-family: -apple-system, sans-serif;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            max-width: 36rem;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.03);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+            backdrop-filter: blur(6px);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+            font-family: -apple-system, sans-serif;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.45);
+            color: var(--white);
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+
+        .form-group textarea { min-height: 140px; }
+
+        .form-error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            background: linear-gradient(90deg,#8A36F5,#A34DFF);
+            color: #fff;
+            border: none;
+            padding: 0.85rem 1.25rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+
+        /* Desktop: two-column form layout */
+        @media (min-width: 860px) {
+            .contact-grid { grid-template-columns: 1fr 520px; gap: 3rem; }
+
+            .contact-form .form-row {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .contact-form .form-row .form-group { flex: 1; margin-bottom: 1rem; }
+        }
+
+        /* Small tweaks for narrow mobile */
+        @media (max-width: 480px) {
+            .contact-section { padding: 3rem 1rem; }
+            .contact-lead { font-size: 0.95rem; }
+            .form-group input, .form-group textarea { font-size: 0.95rem; }
+            .submit-btn { width: 100%; text-align: center; }
+        }
+
+        /* social icon bar positioned at left of contact content on wide screens */
+        .contact-social {
+            position: absolute;
+            left: -64px;
+            top: 30%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 2;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            color: var(--white);
+            text-decoration: none;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .social-link svg { display: block; }
+
+        .social-link:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(180deg,#8A36F5,#A34DFF);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(163,77,255,0.15);
+        }
+
+        /* hide social bar on smaller screens so it doesn't overlap content */
+        @media (max-width: 860px) {
+            .contact-social { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
         /* Cursor follower */
         .cursor-follower {
             width: 20px;
@@ -1466,6 +1653,21 @@
         }
     </style>
     <script>
+        
+    // ============ LENIS SMOOTH SCROLL ============
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+        smoothTouch: false
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
         // ============ MOBILE MENU ============
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -1495,37 +1697,35 @@
             });
         });
 
-        // ============ NAVBAR SCROLL EFFECT ============
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+lenis.on('scroll', ({ scroll }) => {
+    if (scroll > 50) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
 
-        // ============ SMOOTH SCROLL FOR ANCHOR LINKS ============
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
 
-        // ============ SCROLL PROGRESS INDICATOR ============
-        window.addEventListener('scroll', () => {
-            const scrollProgress = document.getElementById('scrollProgress');
-            if (scrollProgress) {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 157; // 157 is the circle circumference
-                scrollProgress.style.strokeDashoffset = 157 - scrolled;
-            }
-        });
+                // ============ LENIS ANCHOR SCROLL ============
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+            lenis.scrollTo(target, { offset: -80 });
+        }
+    });
+});
+
+    
+
+lenis.on('scroll', ({ scroll, limit }) => {
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (scrollProgress) {
+        const scrolled = (scroll / limit) * 157;
+        scrollProgress.style.strokeDashoffset = 157 - scrolled;
+    }
+});
 
         // ============ FADE IN ON SCROLL ============
         const observerOptions = {
@@ -1666,7 +1866,6 @@
         });
 
         console.log('✅ Portfolio JavaScript loaded successfully!');
-    </script>
     </script>
 
 </body>
