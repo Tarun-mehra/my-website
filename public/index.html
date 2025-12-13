@@ -174,7 +174,7 @@
         }
 
         nav {
-            position: fixed;
+            position: relative;
             top: 0;
             width: 100%;
             padding: 2rem 4rem;
@@ -1097,6 +1097,16 @@
                 display: block;
             }
 
+            /* Mobile: reduce navbar padding but keep it in document flow (relative) */
+            nav, nav.scrolled {
+                position: relative;
+                padding: 0.6rem 1rem; /* smaller, mobile-friendly */
+                height: auto;
+                display: flex;
+                align-items: center;
+                background: rgba(255,255,255,0.08);
+            }
+
             .skills-grid {
                 grid-template-columns: 1fr;
             }
@@ -1719,7 +1729,65 @@
         }
     </style>
     <script>
-        
+        document.addEventListener("DOMContentLoaded", () => {
+
+  /* ========= MOBILE MENU ========= */
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  const nav = document.querySelector('nav'); // IMPORTANT
+
+  if (menuBtn) {
+        // toggle the mobile menu (use toggle so clicking again closes it)
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                menuBtn.setAttribute('aria-expanded', 'true');
+                // focus first link for better a11y
+                const firstLink = mobileMenu.querySelector('a');
+                if (firstLink) firstLink.focus();
+            }
+        });
+  }
+
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', closeMenu);
+  }
+
+  if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', closeMenu);
+  }
+
+  function closeMenu() {
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('active');
+        if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+});
+
+// Close mobile menu with Escape key for accessibility
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+        const mm = document.getElementById('mobileMenu');
+        const mo = document.getElementById('mobileMenuOverlay');
+        const mb = document.getElementById('menuBtn');
+        if (mm) mm.classList.remove('active');
+        if (mo) mo.classList.remove('active');
+        if (mb) mb.setAttribute('aria-expanded', 'false');
+    }
+});
+
     // ============ LENIS SMOOTH SCROLL ============
     const lenis = new Lenis({
         duration: 1.2,
@@ -1734,34 +1802,6 @@
     }
     requestAnimationFrame(raf);
 
-        // ============ MOBILE MENU ============
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-        });
-
-        mobileMenuClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-        });
-
-        mobileMenuOverlay.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#mobileMenu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenuOverlay.classList.remove('active');
-            });
-        });
 
 lenis.on('scroll', ({ scroll }) => {
     if (scroll > 50) {
