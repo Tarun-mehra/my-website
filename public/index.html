@@ -82,8 +82,70 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
 
     <style>
+        /* --- HERO ANIMATION PREP --- */
+.hero {
+  overflow: hidden;
+}
+
+.hero-badge {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-title .line span,
+.hero-title .line {
+  display: inline-block;
+}
+
+.hero-description {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-image-wrap {
+  position: relative;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.hero-image {
+  width: 100%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-image-back {
+  position: absolute;
+  inset: 0;
+  filter: blur(40px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.hero-bottom-blur {
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(120px);
+  opacity: 0;
+}
+
+/* subtle floating motion */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -1065,7 +1127,11 @@
             
         }
         
+
     </style>
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
 </head>
 
 <body>
@@ -1867,6 +1933,63 @@ lenis.on('scroll', ({ scroll, limit }) => {
 
         console.log('✅ Portfolio JavaScript loaded successfully!');
     </script>
+    <script>
+gsap.registerPlugin(ScrollTrigger);
+
+// timeline
+const heroTL = gsap.timeline({
+  defaults: { ease: "power4.out" }
+});
+
+// Badge
+heroTL.to(".hero-badge", {
+  opacity: 1,
+  y: 0,
+  duration: 0.6
+});
+
+// Text lines reveal
+heroTL.from(".hero-title .line", {
+  y: 120,
+  skewY: 6,
+  opacity: 0,
+  duration: 1,
+  stagger: 0.15
+}, "-=0.2");
+
+// Description
+heroTL.to(".hero-description", {
+  opacity: 1,
+  y: 0,
+  duration: 0.6
+}, "-=0.4");
+
+// Image reveal
+heroTL.to(".hero-image-wrap", {
+  opacity: 1,
+  scale: 1,
+  duration: 1.1
+}, "-=0.6");
+
+// Bottom blur glow
+heroTL.to(".hero-bottom-blur", {
+  opacity: 1,
+  y: -40,
+  duration: 1.2
+}, "-=0.8");
+
+// Parallax on scroll (image)
+gsap.to(".hero-image", {
+  y: -80,
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: true
+  }
+});
+</script>
+
 
 </body>
 
