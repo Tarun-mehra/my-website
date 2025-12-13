@@ -174,10 +174,10 @@
         }
 
         nav {
-            position: relative;
+            position: fixed;
             top: 0;
             width: 100%;
-            padding: 2rem 4rem;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1136,7 +1136,22 @@
             }
             
         }
-        
+          .cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+
 
     </style>
     <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
@@ -1204,6 +1219,8 @@
             <img src="image/image.copy.png" alt="decorative blur" class="hero-bottom-blur">
 
         </div>
+        <div class="cursor-ring"></div>
+
     </section>
 
     <section class="about-section" id="about">
@@ -1727,6 +1744,12 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
         }
+        @media (max-width: 768px) {
+  .cursor-ring {
+    display: none;
+  }
+}
+
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -1790,11 +1813,12 @@ document.addEventListener('keydown', (e) => {
 
     // ============ LENIS SMOOTH SCROLL ============
     const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smooth: true,
-        smoothTouch: false
-    });
+    lerp: 0.07,              // ⭐ MAIN slow-motion control
+    smoothWheel: true,       // correct option
+    smoothTouch: false,      // keep mobile natural
+    wheelMultiplier: 0.7     // ⭐ reduce scroll speed
+});
+
 
     function raf(time) {
         lenis.raf(time);
@@ -2028,6 +2052,27 @@ gsap.to(".hero-image", {
     scrub: true
   }
 });
+</script>
+<script>
+  const cursor = document.querySelector(".cursor-ring");
+
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    currentX += (mouseX - currentX) * 0.1;
+    currentY += (mouseY - currentY) * 0.1;
+
+    cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+
+  animateCursor();
 </script>
 
 
