@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- PRIMARY SEO -->
-    <title>Tarun Mehra | BSc IT Student - Cloud & UI/UX Desinger</title>
+    <title>Tarun Mehra | BSc IT Student - Cloud & UI/UX Designer</title>
     <meta name="description"
         content="I'm Tarun Mehra, a BSc IT student passionate about networking, cloud computing, and IT infrastructure. Explore my achievements, skills, and experience.">
     <meta name="keywords"
@@ -549,7 +549,42 @@
         /* make highlight plain white (no blue), so it remains visible on a black hero */
         .hero-title .highlight {
             color: #ffffff;
-            font-weight: 400;
+            font-weight: 600;
+            font-size: clamp(2.6rem, 7vw, 5.8rem);
+            line-height: 1.05;
+        }
+
+        /* Hero secondary CTA (small, subtle link under primary button) */
+        .hero-cta-secondary {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.95rem;
+            text-decoration: underline dotted rgba(255,255,255,0.18);
+            font-family: -apple-system, sans-serif;
+            transition: color 0.15s ease;
+        }
+
+        .hero-cta-secondary:hover { color: #ffffff; }
+
+        /* Compact nav CTA (desktop only) */
+        .nav-cta { display: none; text-decoration: none; }
+        @media (min-width: 769px) {
+            .nav-cta {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                background: linear-gradient(90deg,#8A36F5,#A34DFF);
+                color: #fff;
+                margin-left: 1rem;
+                font-size: 0.85rem;
+                font-weight: 600;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .btn:focus-visible, .nav-cta:focus-visible, .hero-cta-secondary:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(138,54,245,0.16);
+            border-radius: 8px;
         }
 
         /* Rainbow gradient for specific hero words (applied to "UI/UX designer")
@@ -652,9 +687,10 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #000000, #000000); /* pure black */
-            border-color: #000000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(90deg,#8A36F5,#A34DFF);
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 12px 30px rgba(138,54,245,0.14);
         }
 
         .btn-primary:hover {
@@ -1114,6 +1150,9 @@
                 flex-direction: column;
             }
 
+            /* Make hero CTA full-width and more tappable on small screens */
+            .hero-buttons .btn { width: 100%; padding: 1rem 1.25rem; border-radius: 12px; } 
+
             .project-item {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1141,6 +1180,152 @@
   transition: width 0.2s ease, height 0.2s ease;
 }
 
+/* ====== BACK TO TOP BUTTON ====== */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #8A36F5, #A34DFF);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  box-shadow: 0 10px 30px rgba(138, 54, 245, 0.3);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(138, 54, 245, 0.5);
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ====== NAVIGATION ACTIVE STATE ====== */
+.nav-links a.active,
+.mobile-menu-links a.active {
+  color: #8A36F5;
+  font-weight: 600;
+}
+
+.nav-links a.active::after {
+  width: 100% !important;
+}
+
+/* ====== IMPROVED FOCUS STYLES ====== */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #8A36F5;
+  outline-offset: 2px;
+}
+
+/* ====== SMOOTH SCROLL BEHAVIOR ====== */
+html, body {
+  scroll-behavior: smooth;
+}
+
+/* ====== IMPROVED READABILITY ====== */
+body {
+  letter-spacing: 0.3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.5px;
+}
+
+p {
+  max-width: 65ch;
+}
+
+/* ====== SKIP LINK FOR ACCESSIBILITY ====== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #8A36F5;
+  color: white;
+  padding: 8px 16px;
+  z-index: 10000;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ====== FORM IMPROVEMENTS ====== */
+.form-group input[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"] {
+  border-color: #ff6b6b !important;
+  background-color: rgba(255, 107, 107, 0.08);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #8A36F5 !important;
+  box-shadow: 0 0 0 3px rgba(138, 54, 245, 0.1);
+}
+
+/* Success state */
+.form-group input.success,
+.form-group textarea.success {
+  border-color: #10b981 !important;
+}
+
+.form-status-message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  animation: slideUp 0.3s ease;
+}
+
+.form-status-message.success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.form-status-message.error {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
     </style>
@@ -1150,6 +1335,7 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="ui-half-circle"></div>
     <!-- centered blurred circle layer -->
     <div class="center-circle" aria-hidden="true"></div>
@@ -1160,9 +1346,10 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#work">Work</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="blogs/mHi, I’m Tarun Mehra — BSc IT Student at GNDU Punjabain.html">Blog</a></li>
+            <li><a href="blogs/main.html">Blog</a></li>
 
         </ul>
+        <a href="#contact" class="nav-cta" aria-label="Contact Tarun">Hire Me</a>
         <button class="menu-btn" id="menuBtn">Menu</button>
     </nav>
 
@@ -1179,26 +1366,33 @@
         </ul>
     </div>
 
-    <section class="hero">
+    <section class="hero" id="main-content">
         <div class="hero-content">
             <div class="hero-text">
-                <div class="hero-badge">👋 Welcome to My Portfolio</div>
+                <div class="hero-badge">Hi — I'm</div>
 
                 <h1 class="hero-title">
                     <span class="line">I'm <span class="highlight">Tarun Mehra</span></span>
                     <span class="line">BSc IT Student &</span>
-                    <span class="line"><span class="rainbow-word">UI/UX designer</span></span>
+                    <span class="line"><span class="rainbow-word">UI/UX Designer</span></span>
                 </h1>
 
                 <p class="hero-description">
                     Learning, building, and growing — one project at a time
                 </p>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary" aria-label="Contact Tarun">Hire Me →</a>
+                    <div style="margin-top:0.6rem; text-align:center;">
+                        <a href="/resume.pdf" class="hero-cta-secondary" aria-label="View resume (PDF)">View resume (PDF)</a>
+                    </div>
+                </div>
             </div>
 
             <!-- inserted image under subheading (keeps DOM position for mobile) -->
             <div class="hero-image-wrap">
-                <img src="image/image copy.png" alt="decorative large background" class="hero-image-back">
-                <img src="image/image.png" alt="Tarun Mehra" class="hero-image">
+                <img src="image/image copy.png" alt="Decorative background blur effect for visual depth" class="hero-image-back">
+                <img src="image/image.png" alt="Tarun Mehra - BSc IT Student and UI/UX Designer from Punjab" class="hero-image">
 
 
             </div>
@@ -1217,7 +1411,7 @@
         <div class="about-content">
             <div class="about-text">
                 <h2>Hello — I'm Tarun from Punjab</h2>
-                <p>Currently pursuing my B.Sc. in Information Technology at Guru Nanak Dev University. My passion lies
+                <p>Currently pursuing my BSc IT at Guru Nanak Dev University. My passion lies
                     in cloud networking and network administration, where I find the perfect blend of technical
                     challenge and practical problem-solving.</p>
                 <p>During my 2-month traineeship with the IT team at a 5-star hotel, I gained hands-on experience
@@ -1226,7 +1420,7 @@
                     in cloud networking, Linux server administration, and network automation.</p>
             </div>
             <div class="about-image">
-                <img src="image/Tarun-mehra-about-me.jpg" alt="Technology workspace with laptop and coding">
+                <img src="image/Tarun-mehra-about-me.jpg" alt="Technology workspace setup with laptop and professional coding environment showing Tarun's work atmosphere">
             </div>
         </div>
     </section>
@@ -1383,25 +1577,25 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
-                        <div class="form-error">Please enter your name</div>
+                        <label for="name">Your Name <span aria-label="required">*</span></label>
+                        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" placeholder="Enter your name">
+                        <div class="form-error" id="name-error">Please enter your name</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                        <div class="form-error">Please enter a valid email</div>
+                        <label for="email">Email Address <span aria-label="required">*</span></label>
+                        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" placeholder="your@email.com">
+                        <div class="form-error" id="email-error">Please enter a valid email</div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <div class="form-error">Please enter your message</div>
+                    <label for="message">Your Message <span aria-label="required">*</span></label>
+                    <textarea id="message" name="message" required aria-required="true" aria-describedby="message-error" placeholder="Tell me about your project or idea..."></textarea>
+                    <div class="form-error" id="message-error">Please enter your message</div>
                 </div>
 
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn" aria-label="Send your message">Send Message</button>
 
                 <!-- small place to show success / error messages (styled by your CSS if you want) -->
                 <div id="contactFormStatus" aria-live="polite" style="margin-top:12px;"></div>
@@ -1409,6 +1603,8 @@
             </div>
         </div>
     </section>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
     <footer>
         <div class="footer-content">
@@ -1744,6 +1940,24 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
+  /* ========= BACK TO TOP BUTTON ========= */
+  const backToTopBtn = document.getElementById('backToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
   /* ========= MOBILE MENU ========= */
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -1837,6 +2051,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+/* ========= ACTIVE NAVIGATION HIGHLIGHTING ========= */
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"], .mobile-menu-links a[href^="#"]');
+
+const updateActiveNav = () => {
+  let current = '';
+  
+  navLinks.forEach(link => {
+    const section = document.querySelector(link.getAttribute('href'));
+    if (section) {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = link.getAttribute('href');
+      }
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === current) {
+      link.classList.add('active');
+    }
+  });
+};
+
+window.addEventListener('scroll', updateActiveNav);
     
 
 lenis.on('scroll', ({ scroll, limit }) => {
@@ -1935,13 +2174,16 @@ lenis.on('scroll', ({ scroll, limit }) => {
                 const data = await response.json();
 
                 if (data.success) {
-                    contactFormStatus.innerHTML = '<div style="color: #10b981; padding: 10px; text-align: center;">✅ Message sent successfully!</div>';
+                    contactFormStatus.innerHTML = '<div class="form-status-message success">✅ Message sent successfully! I will get back to you within 48 hours.</div>';
                     contactForm.reset();
+                    document.querySelectorAll('.form-group input, .form-group textarea').forEach(field => {
+                      field.classList.remove('success', 'error');
+                    });
                 } else {
                     throw new Error(data.message || 'Something went wrong');
                 }
             } catch (error) {
-                contactFormStatus.innerHTML = '<div style="color: #ef4444; padding: 10px; text-align: center;">❌ Failed to send message. Please try again.</div>';
+                contactFormStatus.innerHTML = '<div class="form-status-message error">❌ Failed to send message. Please try again or email info@tarunmehra.site directly.</div>';
                 console.error('Form submission error:', error);
             } finally {
                 submitBtn.disabled = false;
@@ -1959,6 +2201,21 @@ lenis.on('scroll', ({ scroll, limit }) => {
             // Remove error state when user starts typing
             if (field.value.trim()) {
                 group.classList.remove('error');
+                field.setAttribute('aria-invalid', 'false');
+                
+                // Quick validation for email
+                if (field.type === 'email') {
+                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                  if (emailRegex.test(field.value)) {
+                    field.classList.add('success');
+                  } else {
+                    field.classList.remove('success');
+                  }
+                } else if (field.type === 'text') {
+                  field.classList.add('success');
+                }
+            } else {
+                field.classList.remove('success');
             }
         });
 
@@ -1970,13 +2227,19 @@ lenis.on('scroll', ({ scroll, limit }) => {
 
                 if (!field.value.trim()) {
                     group.classList.add('error');
+                    field.setAttribute('aria-invalid', 'true');
                     isValid = false;
                 } else if (field.type === 'email') {
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(field.value)) {
                         group.classList.add('error');
+                        field.setAttribute('aria-invalid', 'true');
                         isValid = false;
+                    } else {
+                      field.setAttribute('aria-invalid', 'false');
                     }
+                } else {
+                  field.setAttribute('aria-invalid', 'false');
                 }
             });
 
